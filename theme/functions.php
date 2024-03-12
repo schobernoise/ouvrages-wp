@@ -1,13 +1,13 @@
 <?php
 /**
- * Ouvrages Wordpress functions and definitions
+ * ouvrages-wp functions and definitions
  *
  * @link https://developer.wordpress.org/themes/basics/theme-functions/
  *
- * @package Ouvrages_Wordpress
+ * @package ouvrages-wp
  */
 
-if ( ! defined( 'OUV_VERSION' ) ) {
+if ( ! defined( 'OUVRAGES_WP_VERSION' ) ) {
 	/*
 	 * Set the theme’s version number.
 	 *
@@ -15,15 +15,15 @@ if ( ! defined( 'OUV_VERSION' ) ) {
 	 * to create your production build, the value below will be replaced in the
 	 * generated zip file with a timestamp, converted to base 36.
 	 */
-	define( 'OUV_VERSION', '0.1.0' );
+	define( 'OUVRAGES_WP_VERSION', '0.1.0' );
 }
 
-if ( ! defined( 'OUV_TYPOGRAPHY_CLASSES' ) ) {
+if ( ! defined( 'OUVRAGES_WP_TYPOGRAPHY_CLASSES' ) ) {
 	/*
 	 * Set Tailwind Typography classes for the front end, block editor and
 	 * classic editor using the constant below.
 	 *
-	 * For the front end, these classes are added by the `ouv_content_class`
+	 * For the front end, these classes are added by the `ouvrages_wp_content_class`
 	 * function. You will see that function used everywhere an `entry-content`
 	 * or `page-content` class has been added to a wrapper element.
 	 *
@@ -37,12 +37,12 @@ if ( ! defined( 'OUV_TYPOGRAPHY_CLASSES' ) ) {
 	 * initializes.
 	 */
 	define(
-		'OUV_TYPOGRAPHY_CLASSES',
+		'OUVRAGES_WP_TYPOGRAPHY_CLASSES',
 		'prose prose-neutral max-w-none prose-a:text-primary'
 	);
 }
 
-if ( ! function_exists( 'ouv_setup' ) ) :
+if ( ! function_exists( 'ouvrages_wp_setup' ) ) :
 	/**
 	 * Sets up theme defaults and registers support for various WordPress features.
 	 *
@@ -50,11 +50,11 @@ if ( ! function_exists( 'ouv_setup' ) ) :
 	 * runs before the init hook. The init hook is too late for some features, such
 	 * as indicating support for post thumbnails.
 	 */
-	function ouv_setup() {
+	function ouvrages_wp_setup() {
 		/*
 		 * Make theme available for translation.
 		 * Translations can be filed in the /languages/ directory.
-		 * If you're building a theme based on Ouvrages Wordpress, use a find and replace
+		 * If you're building a theme based on ouvrages-wp, use a find and replace
 		 * to change 'ouvrages-wp' to the name of your theme in all the template files.
 		 */
 		load_theme_textdomain( 'ouvrages-wp', get_template_directory() . '/languages' );
@@ -119,14 +119,14 @@ if ( ! function_exists( 'ouv_setup' ) ) :
 		remove_theme_support( 'block-templates' );
 	}
 endif;
-add_action( 'after_setup_theme', 'ouv_setup' );
+add_action( 'after_setup_theme', 'ouvrages_wp_setup' );
 
 /**
  * Register widget area.
  *
  * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
  */
-function ouv_widgets_init() {
+function ouvrages_wp_widgets_init() {
 	register_sidebar(
 		array(
 			'name'          => __( 'Footer', 'ouvrages-wp' ),
@@ -139,25 +139,25 @@ function ouv_widgets_init() {
 		)
 	);
 }
-add_action( 'widgets_init', 'ouv_widgets_init' );
+add_action( 'widgets_init', 'ouvrages_wp_widgets_init' );
 
 /**
  * Enqueue scripts and styles.
  */
-function ouv_scripts() {
-	wp_enqueue_style( 'ouvrages-wp-style', get_stylesheet_uri(), array(), OUV_VERSION );
-	wp_enqueue_script( 'ouvrages-wp-script', get_template_directory_uri() . '/js/script.min.js', array(), OUV_VERSION, true );
+function ouvrages_wp_scripts() {
+	wp_enqueue_style( 'ouvrages-wp-style', get_stylesheet_uri(), array(), OUVRAGES_WP_VERSION );
+	wp_enqueue_script( 'ouvrages-wp-script', get_template_directory_uri() . '/js/script.min.js', array(), OUVRAGES_WP_VERSION, true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
 }
-add_action( 'wp_enqueue_scripts', 'ouv_scripts' );
+add_action( 'wp_enqueue_scripts', 'ouvrages_wp_scripts' );
 
 /**
  * Enqueue the block editor script.
  */
-function ouv_enqueue_block_editor_script() {
+function ouvrages_wp_enqueue_block_editor_script() {
 	wp_enqueue_script(
 		'ouvrages-wp-editor',
 		get_template_directory_uri() . '/js/block-editor.min.js',
@@ -165,18 +165,18 @@ function ouv_enqueue_block_editor_script() {
 			'wp-blocks',
 			'wp-edit-post',
 		),
-		OUV_VERSION,
+		OUVRAGES_WP_VERSION,
 		true
 	);
 }
-add_action( 'enqueue_block_editor_assets', 'ouv_enqueue_block_editor_script' );
+add_action( 'enqueue_block_editor_assets', 'ouvrages_wp_enqueue_block_editor_script' );
 
 /**
  * Enqueue the script necessary to support Tailwind Typography in the block
  * editor, using an inline script to create a JavaScript array containing the
- * Tailwind Typography classes from OUV_TYPOGRAPHY_CLASSES.
+ * Tailwind Typography classes from OUVRAGES_WP_TYPOGRAPHY_CLASSES.
  */
-function ouv_enqueue_typography_script() {
+function ouvrages_wp_enqueue_typography_script() {
 	if ( is_admin() ) {
 		wp_enqueue_script(
 			'ouvrages-wp-typography',
@@ -185,13 +185,13 @@ function ouv_enqueue_typography_script() {
 				'wp-blocks',
 				'wp-edit-post',
 			),
-			OUV_VERSION,
+			OUVRAGES_WP_VERSION,
 			true
 		);
-		wp_add_inline_script( 'ouvrages-wp-typography', "tailwindTypographyClasses = '" . esc_attr( OUV_TYPOGRAPHY_CLASSES ) . "'.split(' ');", 'before' );
+		wp_add_inline_script( 'ouvrages-wp-typography', "tailwindTypographyClasses = '" . esc_attr( OUVRAGES_WP_TYPOGRAPHY_CLASSES ) . "'.split(' ');", 'before' );
 	}
 }
-add_action( 'enqueue_block_assets', 'ouv_enqueue_typography_script' );
+add_action( 'enqueue_block_assets', 'ouvrages_wp_enqueue_typography_script' );
 
 /**
  * Add the Tailwind Typography classes to TinyMCE.
@@ -199,11 +199,11 @@ add_action( 'enqueue_block_assets', 'ouv_enqueue_typography_script' );
  * @param array $settings TinyMCE settings.
  * @return array
  */
-function ouv_tinymce_add_class( $settings ) {
-	$settings['body_class'] = OUV_TYPOGRAPHY_CLASSES;
+function ouvrages_wp_tinymce_add_class( $settings ) {
+	$settings['body_class'] = OUVRAGES_WP_TYPOGRAPHY_CLASSES;
 	return $settings;
 }
-add_filter( 'tiny_mce_before_init', 'ouv_tinymce_add_class' );
+add_filter( 'tiny_mce_before_init', 'ouvrages_wp_tinymce_add_class' );
 
 /**
  * Custom template tags for this theme.

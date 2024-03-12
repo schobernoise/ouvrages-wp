@@ -4,7 +4,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package Ouvrages_Wordpress
+ * @package ouvrages-wp
  */
 
 ?>
@@ -23,10 +23,10 @@
 			<?php
 		endif;
 
-		$ouv_description = get_bloginfo( 'description', 'display' );
-		if ( $ouv_description || is_customize_preview() ) :
+		$ouvrages_wp_description = get_bloginfo( 'description', 'display' );
+		if ( $ouvrages_wp_description || is_customize_preview() ) :
 			?>
-			<p><?php echo $ouv_description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
+			<p><?php echo $ouvrages_wp_description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
 		<?php endif; ?>
 	</div>
 

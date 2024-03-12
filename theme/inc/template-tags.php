@@ -4,14 +4,14 @@
  *
  * Eventually, some functionality here could be replaced by core features.
  *
- * @package Ouvrages_Wordpress
+ * @package ouvrages-wp
  */
 
-if ( ! function_exists( 'ouv_posted_on' ) ) :
+if ( ! function_exists( 'ouvrages_wp_posted_on' ) ) :
 	/**
 	 * Prints HTML with meta information for the current post-date/time.
 	 */
-	function ouv_posted_on() {
+	function ouvrages_wp_posted_on() {
 		$time_string = '<time datetime="%1$s">%2$s</time>';
 		if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
 			$time_string = '<time datetime="%1$s">%2$s</time><time datetime="%3$s">%4$s</time>';
@@ -33,11 +33,11 @@ if ( ! function_exists( 'ouv_posted_on' ) ) :
 	}
 endif;
 
-if ( ! function_exists( 'ouv_posted_by' ) ) :
+if ( ! function_exists( 'ouvrages_wp_posted_by' ) ) :
 	/**
 	 * Prints HTML with meta information about theme author.
 	 */
-	function ouv_posted_by() {
+	function ouvrages_wp_posted_by() {
 		printf(
 		/* translators: 1: posted by label, only visible to screen readers. 2: author link. 3: post author. */
 			'<span class="sr-only">%1$s</span><span class="author vcard"><a class="url fn n" href="%2$s">%3$s</a></span>',
@@ -48,11 +48,11 @@ if ( ! function_exists( 'ouv_posted_by' ) ) :
 	}
 endif;
 
-if ( ! function_exists( 'ouv_comment_count' ) ) :
+if ( ! function_exists( 'ouvrages_wp_comment_count' ) ) :
 	/**
 	 * Prints HTML with the comment count for the current post.
 	 */
-	function ouv_comment_count() {
+	function ouvrages_wp_comment_count() {
 		if ( ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
 			/* translators: %s: Name of current post. Only visible to screen readers. */
 			comments_popup_link( sprintf( __( 'Leave a comment<span class="sr-only"> on %s</span>', 'ouvrages-wp' ), get_the_title() ) );
@@ -60,21 +60,21 @@ if ( ! function_exists( 'ouv_comment_count' ) ) :
 	}
 endif;
 
-if ( ! function_exists( 'ouv_entry_meta' ) ) :
+if ( ! function_exists( 'ouvrages_wp_entry_meta' ) ) :
 	/**
 	 * Prints HTML with meta information for the categories, tags and comments.
 	 * This template tag is used in the entry header.
 	 */
-	function ouv_entry_meta() {
+	function ouvrages_wp_entry_meta() {
 
 		// Hide author, post date, category and tag text for pages.
 		if ( 'post' === get_post_type() ) {
 
 			// Posted by.
-			ouv_posted_by();
+			ouvrages_wp_posted_by();
 
 			// Posted on.
-			ouv_posted_on();
+			ouvrages_wp_posted_on();
 
 			/* translators: used between list items, there is a space after the comma. */
 			$categories_list = get_the_category_list( __( ', ', 'ouvrages-wp' ) );
@@ -101,7 +101,7 @@ if ( ! function_exists( 'ouv_entry_meta' ) ) :
 
 		// Comment count.
 		if ( ! is_singular() ) {
-			ouv_comment_count();
+			ouvrages_wp_comment_count();
 		}
 
 		// Edit post link.
@@ -122,20 +122,20 @@ if ( ! function_exists( 'ouv_entry_meta' ) ) :
 	}
 endif;
 
-if ( ! function_exists( 'ouv_entry_footer' ) ) :
+if ( ! function_exists( 'ouvrages_wp_entry_footer' ) ) :
 	/**
 	 * Prints HTML with meta information for the categories, tags and comments.
 	 */
-	function ouv_entry_footer() {
+	function ouvrages_wp_entry_footer() {
 
 		// Hide author, post date, category and tag text for pages.
 		if ( 'post' === get_post_type() ) {
 
 			// Posted by.
-			ouv_posted_by();
+			ouvrages_wp_posted_by();
 
 			// Posted on.
-			ouv_posted_on();
+			ouvrages_wp_posted_on();
 
 			/* translators: used between list items, there is a space after the comma. */
 			$categories_list = get_the_category_list( __( ', ', 'ouvrages-wp' ) );
@@ -162,7 +162,7 @@ if ( ! function_exists( 'ouv_entry_footer' ) ) :
 
 		// Comment count.
 		if ( ! is_singular() ) {
-			ouv_comment_count();
+			ouvrages_wp_comment_count();
 		}
 
 		// Edit post link.
@@ -183,13 +183,13 @@ if ( ! function_exists( 'ouv_entry_footer' ) ) :
 	}
 endif;
 
-if ( ! function_exists( 'ouv_post_thumbnail' ) ) :
+if ( ! function_exists( 'ouvrages_wp_post_thumbnail' ) ) :
 	/**
 	 * Displays an optional post thumbnail, wrapping the post thumbnail in an
 	 * anchor element except when viewing a single post.
 	 */
-	function ouv_post_thumbnail() {
-		if ( ! ouv_can_show_post_thumbnail() ) {
+	function ouvrages_wp_post_thumbnail() {
+		if ( ! ouvrages_wp_can_show_post_thumbnail() ) {
 			return;
 		}
 
@@ -215,30 +215,30 @@ if ( ! function_exists( 'ouv_post_thumbnail' ) ) :
 	}
 endif;
 
-if ( ! function_exists( 'ouv_comment_avatar' ) ) :
+if ( ! function_exists( 'ouvrages_wp_comment_avatar' ) ) :
 	/**
 	 * Returns the HTML markup to generate a user avatar.
 	 *
 	 * @param mixed $id_or_email The Gravatar to retrieve. Accepts a user_id, gravatar md5 hash,
 	 *                           user email, WP_User object, WP_Post object, or WP_Comment object.
 	 */
-	function ouv_get_user_avatar_markup( $id_or_email = null ) {
+	function ouvrages_wp_get_user_avatar_markup( $id_or_email = null ) {
 
 		if ( ! isset( $id_or_email ) ) {
 			$id_or_email = get_current_user_id();
 		}
 
-		return sprintf( '<div class="vcard">%s</div>', get_avatar( $id_or_email, ouv_get_avatar_size() ) );
+		return sprintf( '<div class="vcard">%s</div>', get_avatar( $id_or_email, ouvrages_wp_get_avatar_size() ) );
 	}
 endif;
 
-if ( ! function_exists( 'ouv_discussion_avatars_list' ) ) :
+if ( ! function_exists( 'ouvrages_wp_discussion_avatars_list' ) ) :
 	/**
 	 * Displays a list of avatars involved in a discussion for a given post.
 	 *
 	 * @param array $comment_authors Comment authors to list as avatars.
 	 */
-	function ouv_discussion_avatars_list( $comment_authors ) {
+	function ouvrages_wp_discussion_avatars_list( $comment_authors ) {
 		if ( empty( $comment_authors ) ) {
 			return;
 		}
@@ -246,18 +246,18 @@ if ( ! function_exists( 'ouv_discussion_avatars_list' ) ) :
 		foreach ( $comment_authors as $id_or_email ) {
 			printf(
 				"<li>%s</li>\n",
-				ouv_get_user_avatar_markup( $id_or_email ) // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				ouvrages_wp_get_user_avatar_markup( $id_or_email ) // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			);
 		}
 		echo '</ol>', "\n";
 	}
 endif;
 
-if ( ! function_exists( 'ouv_the_posts_navigation' ) ) :
+if ( ! function_exists( 'ouvrages_wp_the_posts_navigation' ) ) :
 	/**
 	 * Wraps `the_posts_pagination` for use throughout the theme.
 	 */
-	function ouv_the_posts_navigation() {
+	function ouvrages_wp_the_posts_navigation() {
 		the_posts_pagination(
 			array(
 				'mid_size'  => 2,
@@ -268,22 +268,22 @@ if ( ! function_exists( 'ouv_the_posts_navigation' ) ) :
 	}
 endif;
 
-if ( ! function_exists( 'ouv_content_class' ) ) :
+if ( ! function_exists( 'ouvrages_wp_content_class' ) ) :
 	/**
 	 * Displays the class names for the post content wrapper.
 	 *
 	 * This allows us to add Tailwind Typography’s modifier classes throughout
 	 * the theme without repeating them in multiple files. (They can be edited
 	 * at the top of the `../functions.php` file via the
-	 * OUV_TYPOGRAPHY_CLASSES constant.)
+	 * OUVRAGES_WP_TYPOGRAPHY_CLASSES constant.)
 	 *
 	 * Based on WordPress core’s `body_class` and `get_body_class` functions.
 	 *
 	 * @param array $classes Space-separated string or array of class names to
 	 *                     add to the class list.
 	 */
-	function ouv_content_class( $classes = '' ) {
-		$all_classes = array( $classes, OUV_TYPOGRAPHY_CLASSES );
+	function ouvrages_wp_content_class( $classes = '' ) {
+		$all_classes = array( $classes, OUVRAGES_WP_TYPOGRAPHY_CLASSES );
 
 		foreach ( $all_classes as &$class_groups ) {
 			if ( ! empty( $class_groups ) ) {

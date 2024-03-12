@@ -4,7 +4,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package Ouvrages_Wordpress
+ * @package ouvrages-wp
  */
 
 ?>
@@ -16,14 +16,14 @@
 
 		<?php if ( ! is_page() ) : ?>
 			<div class="entry-meta">
-				<?php ouv_entry_meta(); ?>
+				<?php ouvrages_wp_entry_meta(); ?>
 			</div><!-- .entry-meta -->
 		<?php endif; ?>
 	</header><!-- .entry-header -->
 
-	<?php ouv_post_thumbnail(); ?>
+	<?php ouvrages_wp_post_thumbnail(); ?>
 
-	<div <?php ouv_content_class( 'entry-content' ); ?>>
+	<div <?php ouvrages_wp_content_class( 'entry-content' ); ?>>
 		<?php
 		the_content(
 			sprintf(
@@ -50,7 +50,7 @@
 	</div><!-- .entry-content -->
 
 	<footer class="entry-footer">
-		<?php ouv_entry_footer(); ?>
+		<?php ouvrages_wp_entry_footer(); ?>
 	</footer><!-- .entry-footer -->
 
 </article><!-- #post-${ID} -->

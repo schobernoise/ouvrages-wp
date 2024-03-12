@@ -4,7 +4,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package Ouvrages_Wordpress
+ * @package ouvrages-wp
  */
 
 ?>
@@ -21,9 +21,9 @@
 		?>
 	</header><!-- .entry-header -->
 
-	<?php ouv_post_thumbnail(); ?>
+	<?php ouvrages_wp_post_thumbnail(); ?>
 
-	<div <?php ouv_content_class( 'entry-content' ); ?>>
+	<div <?php ouvrages_wp_content_class( 'entry-content' ); ?>>
 		<?php
 		the_content();
 

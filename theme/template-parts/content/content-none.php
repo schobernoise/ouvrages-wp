@@ -4,7 +4,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package Ouvrages_Wordpress
+ * @package ouvrages-wp
  */
 
 ?>
@@ -32,7 +32,7 @@
 		<?php endif; ?>
 	</header><!-- .page-header -->
 
-	<div <?php ouv_content_class( 'page-content' ); ?>>
+	<div <?php ouvrages_wp_content_class( 'page-content' ); ?>>
 		<?php
 		if ( is_home() && current_user_can( 'publish_posts' ) ) :
 			?>

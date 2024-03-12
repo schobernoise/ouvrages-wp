@@ -8,7 +8,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package Ouvrages_Wordpress
+ * @package ouvrages-wp
  */
 
 get_header();

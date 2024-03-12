@@ -4,7 +4,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package Ouvrages_Wordpress
+ * @package ouvrages-wp
  */
 
 ?>
@@ -33,8 +33,8 @@
 
 	<div>
 		<?php
-		$ouv_blog_info = get_bloginfo( 'name' );
-		if ( ! empty( $ouv_blog_info ) ) :
+		$ouvrages_wp_blog_info = get_bloginfo( 'name' );
+		if ( ! empty( $ouvrages_wp_blog_info ) ) :
 			?>
 			<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a>,
 			<?php

@@ -2,18 +2,18 @@
 /**
  * Functions which enhance the theme by hooking into WordPress
  *
- * @package Ouvrages_Wordpress
+ * @package ouvrages-wp
  */
 
 /**
  * Add a pingback url auto-discovery header for single posts, pages, or attachments.
  */
-function ouv_pingback_header() {
+function ouvrages_wp_pingback_header() {
 	if ( is_singular() && pings_open() ) {
 		printf( '<link rel="pingback" href="%s">', esc_url( get_bloginfo( 'pingback_url' ) ) );
 	}
 }
-add_action( 'wp_head', 'ouv_pingback_header' );
+add_action( 'wp_head', 'ouvrages_wp_pingback_header' );
 
 /**
  * Changes comment form default fields.
@@ -22,7 +22,7 @@ add_action( 'wp_head', 'ouv_pingback_header' );
  *
  * @return array Returns the modified fields.
  */
-function ouv_comment_form_defaults( $defaults ) {
+function ouvrages_wp_comment_form_defaults( $defaults ) {
 	$comment_field = $defaults['comment_field'];
 
 	// Adjust height of comment form.
@@ -30,12 +30,12 @@ function ouv_comment_form_defaults( $defaults ) {
 
 	return $defaults;
 }
-add_filter( 'comment_form_defaults', 'ouv_comment_form_defaults' );
+add_filter( 'comment_form_defaults', 'ouvrages_wp_comment_form_defaults' );
 
 /**
  * Filters the default archive titles.
  */
-function ouv_get_the_archive_title() {
+function ouvrages_wp_get_the_archive_title() {
 	if ( is_category() ) {
 		$title = __( 'Category Archives: ', 'ouvrages-wp' ) . '<span>' . single_term_title( '', false ) . '</span>';
 	} elseif ( is_tag() ) {
@@ -67,19 +67,19 @@ function ouv_get_the_archive_title() {
 	}
 	return $title;
 }
-add_filter( 'get_the_archive_title', 'ouv_get_the_archive_title' );
+add_filter( 'get_the_archive_title', 'ouvrages_wp_get_the_archive_title' );
 
 /**
  * Determines whether the post thumbnail can be displayed.
  */
-function ouv_can_show_post_thumbnail() {
-	return apply_filters( 'ouv_can_show_post_thumbnail', ! post_password_required() && ! is_attachment() && has_post_thumbnail() );
+function ouvrages_wp_can_show_post_thumbnail() {
+	return apply_filters( 'ouvrages_wp_can_show_post_thumbnail', ! post_password_required() && ! is_attachment() && has_post_thumbnail() );
 }
 
 /**
  * Returns the size for avatars used in the theme.
  */
-function ouv_get_avatar_size() {
+function ouvrages_wp_get_avatar_size() {
 	return 60;
 }
 
@@ -88,7 +88,7 @@ function ouv_get_avatar_size() {
  *
  * @param string $more_string The string shown within the more link.
  */
-function ouv_continue_reading_link( $more_string ) {
+function ouvrages_wp_continue_reading_link( $more_string ) {
 
 	if ( ! is_admin() ) {
 		$continue_reading = sprintf(
@@ -104,10 +104,10 @@ function ouv_continue_reading_link( $more_string ) {
 }
 
 // Filter the excerpt more link.
-add_filter( 'excerpt_more', 'ouv_continue_reading_link' );
+add_filter( 'excerpt_more', 'ouvrages_wp_continue_reading_link' );
 
 // Filter the content more link.
-add_filter( 'the_content_more_link', 'ouv_continue_reading_link' );
+add_filter( 'the_content_more_link', 'ouvrages_wp_continue_reading_link' );
 
 /**
  * Outputs a comment in the HTML5 format.
@@ -120,7 +120,7 @@ add_filter( 'the_content_more_link', 'ouv_continue_reading_link' );
  * @param array      $args    An array of arguments.
  * @param int        $depth   Depth of the current comment.
  */
-function ouv_html5_comment( $comment, $args, $depth ) {
+function ouvrages_wp_html5_comment( $comment, $args, $depth ) {
 	$tag = ( 'div' === $args['style'] ) ? 'div' : 'li';
 
 	$commenter          = wp_get_current_commenter();
@@ -181,7 +181,7 @@ function ouv_html5_comment( $comment, $args, $depth ) {
 				<?php endif; ?>
 			</footer><!-- .comment-meta -->
 
-			<div <?php ouv_content_class( 'comment-content' ); ?>>
+			<div <?php ouvrages_wp_content_class( 'comment-content' ); ?>>
 				<?php comment_text(); ?>
 			</div><!-- .comment-content -->
 

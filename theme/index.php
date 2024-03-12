@@ -9,7 +9,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package Ouvrages_Wordpress
+ * @package ouvrages-wp
  */
 
 get_header();
@@ -19,33 +19,32 @@ get_header();
 		<main id="main">
 
 		<?php
-		// if ( have_posts() ) {
+		if ( have_posts() ) {
 
-		// 	if ( is_home() && ! is_front_page() ) :
+			if ( is_home() && ! is_front_page() ) :
 				?>
 				<header class="entry-header">
 					<h1 class="entry-title"><?php single_post_title(); ?></h1>
 				</header><!-- .entry-header -->
 				<?php
-		// 	endif;
+			endif;
 
-		// 	// Load posts loop.
-		// 	while ( have_posts() ) {
-		// 		the_post();
-		// 		get_template_part( 'template-parts/content/content' );
-		// 	}
+			// Load posts loop.
+			while ( have_posts() ) {
+				the_post();
+				get_template_part( 'template-parts/content/content' );
+			}
 
-		// 	// Previous/next page navigation.
-		// 	ouv_the_posts_navigation();
+			// Previous/next page navigation.
+			ouvrages_wp_the_posts_navigation();
 
-		// } else {
+		} else {
 
-		// 	// If no content, include the "No posts found" template.
-		// 	get_template_part( 'template-parts/content/content', 'none' );
+			// If no content, include the "No posts found" template.
+			get_template_part( 'template-parts/content/content', 'none' );
 
-		// }
+		}
 		?>
-		<div class="w-screen h-screen bg-daily-dev-tips flex items-center justify-center"><h1>Welcome</h1></div>
 
 		</main><!-- #main -->
 	</section><!-- #primary -->

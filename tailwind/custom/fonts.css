@@ -3,3 +3,78 @@
  *
  * These will be added immediately before Tailwind’s `base` layer.
  */
+
+@font-face {
+	font-family: "avenir";
+	src:
+		url("assets/fonts/avenir_black-webfont.woff2") format("woff2"),
+		url("assets/fonts/avenir_black-webfont.woff") format("woff");
+	font-weight: 900;
+	font-style: black;
+}
+
+@font-face {
+	font-family: "avenir";
+	src:
+		url("assets/fonts/avenir_book-webfont.woff2") format("woff2"),
+		url("assets/fonts/avenir_book-webfont.woff") format("woff");
+	font-weight: 500;
+	font-style: book;
+}
+
+@font-face {
+	font-family: "avenir";
+	src:
+		url("assets/fonts/avenir_heavy-webfont.woff2") format("woff2"),
+		url("assets/fonts/avenir_heavy-webfont.woff") format("woff");
+	font-weight: 700;
+	font-style: heavy;
+}
+
+@font-face {
+	font-family: "avenir";
+	src:
+		url("assets/fonts/avenir_light-webfont.woff2") format("woff2"),
+		url("assets/fonts/avenir_light-webfont.woff") format("woff");
+	font-weight: 300;
+	font-style: light;
+}
+
+@font-face {
+	font-family: "avenir";
+	src:
+		url("assets/fonts/avenir_regular-webfont.woff2") format("woff2"),
+		url("assets/fonts/avenir_regular-webfont.woff") format("woff");
+	font-weight: 400;
+	font-style: regular;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	@apply text-schoberDarkRed leading-tight !important;
+}
+
+/* @layer headings {
+	h1 {
+		@apply text-9xl lowercase !important;
+	}
+
+	h2 {
+		@apply text-8xl;
+	}
+} */
+
+body {
+	@apply font-sans !important;
+}
+
+*:focus,
+button:focus {
+	@apply outline-none shadow-none;
+	outline-offset: none;
+	outline: none;
+}

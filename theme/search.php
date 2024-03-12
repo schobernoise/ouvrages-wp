@@ -4,7 +4,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#search-result
  *
- * @package Ouvrages_Wordpress
+ * @package ouvrages-wp
  */
 
 get_header();
@@ -36,7 +36,7 @@ get_header();
 			endwhile;
 
 			// Previous/next page navigation.
-			ouv_the_posts_navigation();
+			ouvrages_wp_the_posts_navigation();
 
 		else :
 
