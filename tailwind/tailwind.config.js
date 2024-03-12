@@ -19,6 +19,9 @@ module.exports = {
 			xl: '1400px',
 		},
 		extend: {
+			spacing: {
+				22: '88px', // Custom spacing for content margin
+			},
 			colors: {
 				schoberDarkRed: '#5F021F',
 				schoberBrightRed: '#9F1313',

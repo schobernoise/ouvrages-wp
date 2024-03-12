@@ -35,3 +35,11 @@
  */
 @import "tailwindcss/utilities";
 @import "./custom/utilities.css";
+
+main {
+	@apply grid grid-cols-8 gap-4 w-fit;
+}
+
+body {
+	@apply;
+}

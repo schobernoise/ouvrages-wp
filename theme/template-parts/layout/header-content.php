@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Template part for displaying the header content
  *
@@ -10,38 +11,33 @@
 ?>
 
 <header id="masthead">
-
-	<div>
-		<?php
-		if ( is_front_page() ) :
-			?>
-			<h1><?php bloginfo( 'name' ); ?></h1>
-			<?php
-		else :
-			?>
-			<p><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
-			<?php
-		endif;
-
-		$ouvrages_wp_description = get_bloginfo( 'description', 'display' );
-		if ( $ouvrages_wp_description || is_customize_preview() ) :
-			?>
-			<p><?php echo $ouvrages_wp_description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
-		<?php endif; ?>
-	</div>
-
-	<nav id="site-navigation" aria-label="<?php esc_attr_e( 'Main Navigation', 'ouvrages-wp' ); ?>">
-		<button aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'ouvrages-wp' ); ?></button>
+	<div class="  pt-8 col-span-2 bg-schoberDarkRed text-white w-1/5 h-screen text-center">
 
 		<?php
-		wp_nav_menu(
-			array(
-				'theme_location' => 'menu-1',
-				'menu_id'        => 'primary-menu',
-				'items_wrap'     => '<ul id="%1$s" class="%2$s" aria-label="submenu">%3$s</ul>',
-			)
-		);
+		$custom_logo_id = get_theme_mod('custom_logo');
+		$logoUrl = wp_get_attachment_image_src($custom_logo_id, 'full');
 		?>
-	</nav><!-- #site-navigation -->
+		<div id="content">
+			<img src="<?php echo $logoUrl[0]; ?>" class="w-14 mx-auto mb-4">
 
+			<nav id="site-navigation" class="mx-auto" aria-label="<?php esc_attr_e('Main Navigation', 'ouvrages-wp'); ?>">
+
+				<!-- <div class="w-24"> -->
+				<?php
+				wp_nav_menu(
+					array(
+						'theme_location' => 'menu-1',
+						'menu_id'        => 'primary-menu',
+						'items_wrap'     => '<ul id="%1$s" class="%2$s" aria-label="submenu">%3$s</ul>',
+					)
+				);
+				?>
+				<!-- </div> -->
+
+
+			</nav>
+		</div>
+
+
+	</div>
 </header><!-- #masthead -->
