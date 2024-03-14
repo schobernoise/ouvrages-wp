@@ -11,6 +11,22 @@
  * `theme.json` file and is applied both to the frontend and in the block
  * editor.
 */
-body {
-	@apply bg-background text-foreground font-sans;
+
+img {
+	max-width: unset;
+}
+
+body,
+html {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+#site-navigation li {
+	margin-bottom: 0.75rem;
+}
+
+.active {
+	text-decoration: underline;
 }

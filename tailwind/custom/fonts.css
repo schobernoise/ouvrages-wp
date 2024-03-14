@@ -19,7 +19,7 @@
 		url("assets/fonts/avenir_book-webfont.woff2") format("woff2"),
 		url("assets/fonts/avenir_book-webfont.woff") format("woff");
 	font-weight: 500;
-	font-style: book;
+	font-style: medium;
 }
 
 @font-face {
@@ -28,7 +28,7 @@
 		url("assets/fonts/avenir_heavy-webfont.woff2") format("woff2"),
 		url("assets/fonts/avenir_heavy-webfont.woff") format("woff");
 	font-weight: 700;
-	font-style: heavy;
+	font-style: bold;
 }
 
 @font-face {
@@ -46,7 +46,11 @@
 		url("assets/fonts/avenir_regular-webfont.woff2") format("woff2"),
 		url("assets/fonts/avenir_regular-webfont.woff") format("woff");
 	font-weight: 400;
-	font-style: regular;
+	font-style: normal;
+}
+
+* {
+	@apply font-sans !important;
 }
 
 h1,
@@ -55,26 +59,27 @@ h3,
 h4,
 h5,
 h6 {
-	@apply text-schoberDarkRed leading-tight !important;
+	@apply leading-tight !important;
+	color: #000000 !important;
+	margin-bottom: 1rem;
 }
 
-/* @layer headings {
-	h1 {
-		@apply text-9xl lowercase !important;
-	}
-
-	h2 {
-		@apply text-8xl;
-	}
-} */
-
-body {
-	@apply font-sans !important;
+h1 {
+	font-size: 72px !important;
 }
 
-*:focus,
-button:focus {
-	@apply outline-none shadow-none;
-	outline-offset: none;
-	outline: none;
+h2 {
+	font-size: 32px;
+}
+
+h3 {
+	font-size: 24px;
+}
+
+h3 {
+	font-size: 16px;
+}
+
+p {
+	line-height: 1.25rem;
 }

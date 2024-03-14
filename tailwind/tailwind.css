@@ -40,6 +40,6 @@ main {
 	@apply grid grid-cols-8 gap-4 w-fit;
 }
 
-body {
+/* body {
 	@apply;
-}
+} */

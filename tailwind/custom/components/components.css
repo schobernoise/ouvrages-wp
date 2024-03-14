@@ -54,3 +54,10 @@
 .entry-content > .alignright {
 	@apply float-right ml-8;
 }
+
+*:focus,
+button:focus {
+	@apply outline-none shadow-none;
+	outline-offset: none;
+	outline: none;
+}

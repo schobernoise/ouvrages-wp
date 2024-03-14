@@ -18,7 +18,7 @@ get_header();
 
 <section id="primary">
 	<main id="main">
-		<h1>INDEX</h1>
+		<h1>Live Dates</h1>
 
 
 	</main><!-- #main -->

@@ -26,6 +26,6 @@
 
 	<?php wp_body_open(); ?>
 
-	<div id="container" class="w-screen grid grid-cols-10 gap-4 mx-22">
+	<div id="container" class=" max-h-max grid grid-cols-10 gap-4 mx-22">
 
 		<?php get_template_part('template-parts/layout/header', 'content'); ?>
