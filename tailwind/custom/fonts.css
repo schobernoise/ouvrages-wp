@@ -48,38 +48,3 @@
 	font-weight: 400;
 	font-style: normal;
 }
-
-* {
-	@apply font-sans !important;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-	@apply leading-tight !important;
-	color: #000000 !important;
-	margin-bottom: 1rem;
-}
-
-h1 {
-	font-size: 72px !important;
-}
-
-h2 {
-	font-size: 32px;
-}
-
-h3 {
-	font-size: 24px;
-}
-
-h3 {
-	font-size: 16px;
-}
-
-p {
-	line-height: 1.25rem;
-}

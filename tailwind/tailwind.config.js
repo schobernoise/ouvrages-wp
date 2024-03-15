@@ -13,14 +13,22 @@ module.exports = {
 	theme: {
 		// Extend the default Tailwind theme.
 		screens: {
-			sm: '480px',
+			xs: '320px',
+			sm: '640px',
 			md: '768px',
 			lg: '976px',
 			xl: '1400px',
+			'2xl': '1920px',
 		},
 		extend: {
 			spacing: {
 				22: '88px', // Custom spacing for content margin
+				minus1: '-8px',
+				minus2: '-12px',
+				minus3: '-16px',
+				minus4: '-24px',
+				minus5: '-32px',
+				minus6: '-48px',
 			},
 			colors: {
 				schoberDarkRed: '#5F021F',

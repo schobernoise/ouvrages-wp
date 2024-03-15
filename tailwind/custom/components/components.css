@@ -61,3 +61,24 @@ button:focus {
 	outline-offset: none;
 	outline: none;
 }
+
+td a {
+	@apply leading-7;
+}
+
+@layer components {
+	/* For Webkit-based browsers (Chrome, Safari and Opera) */
+	.scrollbar-hide::-webkit-scrollbar {
+		display: none;
+	}
+
+	/* For IE, Edge and Firefox */
+	.scrollbar-hide {
+		-ms-overflow-style: none; /* IE and Edge */
+		scrollbar-width: none; /* Firefox */
+	}
+}
+
+.ouvrages-middle-scroll {
+	@apply md:h-[calc(100vh-136px)] md:overflow-y-scroll scrollbar-hide;
+}

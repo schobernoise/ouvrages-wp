@@ -292,3 +292,6 @@ function special_nav_class($classes, $item)
 	}
 	return $classes;
 }
+
+
+// ! https://wordpress.stackexchange.com/questions/173261/current-menu-item-class-not-working

@@ -16,7 +16,7 @@ get_header();
 ?>
 
 
-<main id="main" class="col-span-8">
+<main id="main" class="col-span-4 xl:col-span-8 mx-8 lg:mx-0">
 
 	<?php
 
