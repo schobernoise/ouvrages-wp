@@ -80,5 +80,19 @@ td a {
 }
 
 .ouvrages-middle-scroll {
-	@apply md:h-[calc(100vh-136px)] md:overflow-y-scroll scrollbar-hide;
+	@apply md:h-screen md:overflow-y-scroll scrollbar-hide;
+}
+
+.project-scroll {
+	@apply md:overflow-y-scroll scrollbar-hide;
+	@apply md:h-[calc(100vh-148px)];
+}
+
+/* Masonry Grid */
+.masonry-grid {
+	column-gap: 1rem;
+}
+
+.masonry-item {
+	break-inside: avoid;
 }
