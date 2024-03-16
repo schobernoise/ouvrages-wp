@@ -84,8 +84,8 @@ td a {
 }
 
 .project-scroll {
-	@apply md:overflow-y-scroll scrollbar-hide;
-	@apply md:h-[calc(100vh-148px)];
+	@apply lg:overflow-y-scroll lg:scrollbar-hide;
+	@apply lg:h-[calc(100vh-100px)];
 }
 
 /* Masonry Grid */

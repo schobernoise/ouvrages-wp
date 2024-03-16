@@ -9,7 +9,7 @@ get_header(); ?>
 
 
 
-<main id="main" class="col-span-4 xl:col-span-8 mx-8 lg:mx-0 md:w-max lg:w-full">
+<main id="main" class="col-span-4 xl:col-span-8 mx-8 md:mx-0 lg:mx-0 md:w-full lg:w-full">
 
 
 	<div class="col-span-8 lg:col-span-4 ">
@@ -19,7 +19,7 @@ get_header(); ?>
 
 
 
-			<div <?php ouvrages_wp_content_class('entry-content col-start-1 col-span-4 col-start-1 sm:col-span-3 sm:col-start-2 lg:col-start-1 lg:col-span-4 mt-0 project-scroll mx-8'); ?>>
+			<div <?php ouvrages_wp_content_class('entry-content col-start-1 col-span-4 col-start-1 sm:col-span-4 sm:col-start-1 md:col-span-3 md:col-start-1 lg:col-start-1 lg:col-span-4 mt-0 project-scroll mx-8'); ?>>
 
 
 				<h1 class="font-light col-span-4 lowercase ml-0 sm:ml-4 mt-0">
@@ -53,20 +53,43 @@ get_header(); ?>
 				}
 
 				if (!empty($organized_fields)) : ?>
-					<div class="xs:col-start-1 xs:col-span-4 sm:col-start-1 sm:col-span-3 sm:items-end lg:col-start-1  sm:ml-20 lg:ml-4 xl:ml-16 mt-8">
+					<div class="xs:col-start-1 xs:col-span-4 sm:col-start-1 sm:col-span-3 sm:items-end lg:col-start-1 sm:ml-20 lg:ml-4 xl:ml-16 mt-8">
 						<table>
 							<tbody>
+								<?php
+								// Define an array of keys to be excluded
+								$exclude_keys = array('images', 'oembed', 'ongoing');
+								?>
 								<?php foreach ($organized_fields as $key => $values) : ?>
-									<?php if (!empty($values)) : // Check if there are non-empty values
+									<?php if (!empty($values) && !in_array($key, $exclude_keys)) : // Check if non-empty and not in exclude list
 									?>
 										<tr class="border-0">
-											<th class="text-end align-top"><?php echo esc_html($key); ?></th> <!-- Field Name -->
+											<th class="text-end align-top">
+												<?php
+												// Display the label if it exists, otherwise display the field name
+												echo isset($field_labels[$key]) ? esc_html($field_labels[$key]) : esc_html($key);
+												?>
+											</th> <!-- Field Label or Name -->
 											<td class="pl-4 pt-0 pb-4 align-top">
-												<?php echo implode("<br>", $values); ?> <!-- Combined Values -->
+												<?php
+												// Process each value, check if it's a date and format it
+												$processed_values = array_map(function ($value) {
+													// Check if the value is a date. Adjust the regex as necessary for your date formats.
+													if (preg_match('/^\d{4}-\d{2}-\d{2}$/', $value)) {
+														$date = DateTime::createFromFormat('Y-m-d', $value);
+														return $date->format('j. F Y'); // Format the date
+													}
+													return $value; // Return the original value if it's not a date
+												}, $values);
+
+												// Display the processed values
+												echo implode("<br>", $processed_values);
+												?>
 											</td>
 										</tr>
 									<?php endif; ?>
 								<?php endforeach; ?>
+
 							</tbody>
 						</table>
 					</div>
@@ -85,7 +108,7 @@ get_header(); ?>
 
 	</div>
 
-	<div class="hidden lg:block col-span-4 relative ouvrages-middle-scroll pt-8 h-screen">
+	<div class="col-span-8 lg:col-span-4 pr-4 lg:pr-0 relative ouvrages-middle-scroll pt-8 lg:h-screen">
 		<?php
 		// Assuming you have the post ID in $post_id
 		$images = get_post_meta($post_id, 'images', false); // Notice the 'false' to get an array of values

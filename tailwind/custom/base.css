@@ -14,7 +14,7 @@
 
 html,
 body {
-	@apply md:h-full md:w-full md:absolute md:overflow-hidden;
+	@apply lg:h-full md:w-full lg:absolute lg:overflow-hidden;
 }
 
 * {
@@ -61,7 +61,7 @@ body,
 html {
 	width: 100%;
 	/* height: 100%; */
-	overflow-x: hidden;
+	@apply overflow-x-hidden;
 }
 
 #site-navigation li {
