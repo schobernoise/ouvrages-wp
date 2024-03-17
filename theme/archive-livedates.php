@@ -53,21 +53,47 @@ get_header();
 						<!-- Post layout -->
 						<div class="flex-grow px-4">
 
-							<h3>
+							<h3 class="text-xs mb-0">
 								<a href="<?php the_permalink(); ?>"> <?php the_title(); ?></a>
 							</h3>
-							<p class="text-gray-600"><?php the_time('Y'); ?></p>
-						</div>
-						<!-- Custom Taxonomy -->
-						<div class="inline-flex items-center rounded-md bg-schoberBrightRed px-2 py-1 text-xs font-medium text-white ring-1 ring-inset ring-gray-500/10">
 							<?php
-							$terms = get_the_terms(get_the_ID(), 'livedate-type');
-							if ($terms && !is_wp_error($terms)) :
-								$term_names = wp_list_pluck($terms, 'name');
-								echo implode(', ', $term_names);
-							endif;
+							// Displaying ongoing
+							$post_id = get_the_ID(); // Get the current post ID.
+							$location = get_post_meta($post_id, 'location'); // Retrieve the value of 'location' custom field.
+
+							// Check if 'location' is true and display the badge.
+							if ($location) {
+								echo '<span class=" text-xs font-semibold mb-2 mt-0">' . $location[0] . '</span>';
+							}
 							?>
+							<div class="flex items-center">
+								<p class="text-gray-600"><?php the_time('Y'); ?></p>
+								<!-- Custom Taxonomy -->
+								<div class="inline-flex items-center break-keep">
+									<?php
+									$terms = get_the_terms(get_the_ID(), 'livedate-type');
+									if ($terms && !is_wp_error($terms)) :
+										$term_names = wp_list_pluck($terms, 'name');
+										// echo implode('', $term_names);
+										echo '<span class="project-type break-keep">';
+										$type_links = array();
+
+										foreach ($term_names as $type) {
+											$type_links[] = '<span rel="tag" class="ml-2 inline-flex items-center rounded-md bg-schoberBrightRed px-2 py-1 text-xs font-medium text-white">' . esc_html($type) . '</span>';
+										}
+
+										// Join and output the list of links
+										echo join('', $type_links);
+										echo '</span>';
+
+									endif;
+									?>
+								</div>
+							</div>
+
 						</div>
+
+
 					</div>
 			<?php
 				endwhile;

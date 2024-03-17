@@ -16,7 +16,7 @@ get_header();
 ?>
 
 
-<main id="main" class="col-span-4 xl:col-span-8 mx-8 lg:mx-0 w-full">
+<main id="main" class="col-span-4 xl:col-span-8 mx-8 lg:mx-0">
 
 	<div class="col-span-8 lg:col-span-4">
 
@@ -59,19 +59,44 @@ get_header();
 						</div>
 						<!-- Post layout -->
 						<div class="flex-grow px-4">
-							<h3>
+							<h3 class="mb-0">
 								<a href="<?php the_permalink(); ?>">
 									<?php the_title(); ?></a>
 							</h3>
-							<p class="text-gray-600"><?php the_time('Y'); ?></p>
+							<p class="text-xs"><?php the_excerpt(); ?></p>
+							<!-- <p class="text-gray-600 mt-3 font-bold text-xs"><?php the_time('Y'); ?></p> -->
+
+
+							<?php
+							// // Displaying ongoing
+							// $post_id = get_the_ID(); // Get the current post ID.
+							// $ongoing = get_post_meta($post_id, 'ongoing', true); // Retrieve the value of 'ongoing' custom field.
+
+							// // Check if 'ongoing' is true and display the badge.
+							// if ($ongoing == 'true') {
+							// 	echo '<span class="inline-block bg-blue-500 text-white text-xs px-2 py-1 font-semibold rounded-full">Ongoing</span>';
+							// }
+							?>
+
 						</div>
 						<!-- Custom Taxonomy -->
-						<div class="inline-flex items-center rounded-md bg-schoberBrightRed px-2 py-1 w-min text-xs font-medium text-white ring-1 ring-inset ring-gray-500/10">
+						<div class="inline-flex items-center">
 							<?php
 							$terms = get_the_terms(get_the_ID(), 'project-type');
 							if ($terms && !is_wp_error($terms)) :
 								$term_names = wp_list_pluck($terms, 'name');
-								echo implode(', ', $term_names);
+								// echo implode('', $term_names);
+								echo '<span class="project-type">';
+								$type_links = array();
+
+								foreach ($term_names as $type) {
+									$type_links[] = '<span rel="tag" class="ml-2 inline-flex items-center rounded-md bg-schoberBrightRed px-2 py-1 text-xs font-medium text-white">' . esc_html($type) . '</span>';
+								}
+
+								// Join and output the list of links
+								echo join('', $type_links);
+								echo '</span>';
+
 							endif;
 							?>
 						</div>

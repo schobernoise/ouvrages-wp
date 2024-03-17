@@ -26,6 +26,6 @@
 
 	<?php wp_body_open(); ?>
 
-	<div id="container" class="lg:max-h-max grid grid-cols-4 md:grid-cols-5 xl:grid-cols-10 gap-4 xl:mx-22">
+	<div id="container" class="lg:max-h-max grid grid-cols-4 md:grid-cols-5 xl:grid-cols-10 gap-4 xl:mx-22 pt-12 md:pt-0 md:pl-36 lg:pl-0">
 
 		<?php get_template_part('template-parts/layout/header', 'content'); ?>

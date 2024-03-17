@@ -9,6 +9,7 @@ module.exports = {
 	content: [
 		// Ensure changes to PHP files and `theme.json` trigger a rebuild.
 		'./theme/**/*.php',
+		'./theme/js/*.js',
 	],
 	theme: {
 		// Extend the default Tailwind theme.

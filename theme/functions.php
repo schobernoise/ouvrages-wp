@@ -294,4 +294,35 @@ function special_nav_class($classes, $item)
 }
 
 
-// ! https://wordpress.stackexchange.com/questions/173261/current-menu-item-class-not-working
+function hueman_add_meta_tags()
+{
+
+	global $post;
+
+	if (is_singular()) {
+
+		$des_post = $post->post_excerpt;
+		$des_post = mb_substr($des_post, 0, 300, 'utf8');
+		echo '<meta name="description" content="' . $des_post . '" />' . "\n";
+	}
+
+	if (is_home()) {
+
+		echo '<meta name="description" content="' . get_bloginfo("description") . '" />' . "\n";
+	}
+
+	if (is_page()) {
+
+		$des_post = $post->post_excerpt;
+		echo '<meta name="description" content="' . $des_post . '" />' . "\n";
+	}
+
+	if (is_category()) {
+
+		$des_cat = strip_tags(category_description());
+
+		echo '<meta name="description" content="' . $des_cat . '" />' . "\n";
+	}
+}
+
+add_action('wp_head', 'hueman_add_meta_tags');
