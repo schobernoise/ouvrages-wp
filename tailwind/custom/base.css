@@ -29,7 +29,7 @@ h4,
 h5,
 h6 {
 	@apply leading-tight !important;
-	color: #000000 !important;
+	color: #000000;
 	margin-bottom: 1rem;
 }
 
@@ -50,7 +50,7 @@ p {
 }
 
 a:not(#site-navigation a) {
-	@apply font-semibold no-underline hover:underline text-schoberDarkRed !important;
+	@apply font-semibold no-underline hover:underline text-schoberDarkRed;
 }
 
 img {
@@ -73,4 +73,8 @@ html {
 
 .active {
 	text-decoration: underline;
+}
+
+.link-white {
+	@apply font-normal text-xs text-white !important;
 }

@@ -16,7 +16,7 @@
 
 
 
-		<div <?php ouvrages_wp_content_class('entry-content col-start-1 col-span-4 col-start-1 sm:col-span-3 sm:col-start-2 xl:ml-4 xl:col-start-1 xl:col-span-3 mt-8'); ?>>
+		<div <?php ouvrages_wp_content_class('entry-content col-start-1 col-span-4 sm:col-span-3  xl:ml-4 xl:col-start-1 xl:col-span-3 mt-8'); ?>>
 
 			<h1 class="font-light col-span-4 lowercase ml-0">
 				<?php the_title(); ?>

@@ -13,7 +13,7 @@ get_header();
 ?>
 
 
-<main id="main" class="col-span-4 xl:col-span-8 mx-8 md:mx-0 lg:mx-0 md:w-full lg:w-full">
+<main id="main" class="col-span-4 xl:col-span-8 mx-4 md:mx-0 lg:mx-0 md:w-full lg:w-full">
 
 	<?php
 
@@ -27,6 +27,11 @@ get_header();
 
 				<div <?php ouvrages_wp_content_class('entry-content col-start-1 col-span-4 col-start-1 sm:col-span-4 sm:col-start-1 md:col-span-3 md:col-start-1 lg:col-start-1 lg:col-span-4 mt-0 project-scroll mx-8'); ?>>
 
+					<?php
+					// TODO Duplication
+					$post_type = 'livedates';
+					$archive_link = get_post_type_archive_link($post_type); ?>
+					<a href="<?php echo $archive_link ?>">zurück</a>
 
 					<h1 class="font-light col-span-4 lowercase ml-0 mb-2 mt-0">
 						<?php the_title(); ?>
@@ -59,7 +64,9 @@ get_header();
 							echo join('', $type_links);
 							echo '</span>';
 						}
+
 						?>
+
 					</div>
 
 					<?php the_content(); ?>
@@ -94,7 +101,7 @@ get_header();
 								<tbody>
 									<?php
 									// Define an array of keys to be excluded
-									$exclude_keys = array('images', 'oembed', 'ongoing', 'related_posts', 'projects', 'preview_info');
+									$exclude_keys = array('images', 'oembed', 'ongoing', 'related_posts', 'projects', 'preview_info', 'projects', 'related_livedates', "related_posts");
 									?>
 									<?php foreach ($organized_fields as $key => $values) : ?>
 										<?php if (!empty($values) && !in_array($key, $exclude_keys)) : // Check if non-empty and not in exclude list
@@ -131,6 +138,14 @@ get_header();
 						</div>
 
 					<?php endif; ?>
+
+
+
+					<?php get_template_part('template-parts/content/content', 'related'); ?>
+
+
+					<?php get_template_part('template-parts/content/content', 'navigation'); ?>
+
 
 				</div><!-- .entry-content -->
 

@@ -83,6 +83,22 @@ get_header();
 
 				<?php endif; ?>
 
+				<div class="p-2 col-start-1 col-span-4  sm:col-span-3 sm:col-start-2 xl:col-start-2 xl:col-span-2 mt-8 bg-schoberDarkRed ">
+
+					<h4 class="font-bold text-white mt-0">Neuester Beitrag</h4>
+					<?php
+
+					$recent_posts = wp_get_recent_posts(array(
+						'numberposts' => 1, // Number of recent posts thumbnails to display
+						'post_status' => 'publish' // Show only the published posts
+					));
+					foreach ($recent_posts as $recent) {
+						echo '<a class="link-white"  href="' . get_permalink($recent["ID"]) . '">' . get_the_title($recent["ID"]) . '</a>';
+					}
+					?>
+				</div>
+
+
 
 
 
