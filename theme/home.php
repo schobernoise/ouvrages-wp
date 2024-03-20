@@ -27,7 +27,7 @@ get_header();
 		</h1>
 
 
-		<div class="col-start-1 col-span-4  sm:col-span-3 sm:col-start-2 xl:col-start-2 xl:col-span-2 mt-8 ouvrages-middle-scroll">
+		<div class="col-start-1 col-span-4  sm:col-span-3 sm:col-start-2 xl:col-start-2 xl:col-span-2 mt-8 project-scroll">
 
 			<!-- List container -->
 			<ul class="divide-y divide-gray-200">
@@ -62,8 +62,8 @@ get_header();
 																	?></h4>
 								<h2 class="text-xl font-semibold text-gray-900 mb-1"><a href="<?php the_permalink(); ?>" class="hover:text-gray-600"><?php the_title(); ?></a></h2>
 								<!-- Display Tags -->
-								<div class="post-tags mb-4 text-slate-400">
-									<p><?php the_tags(); ?></p>
+								<div class="post-tags mb-4">
+									<p class="link-muted"><?php the_tags(''); ?></p>
 								</div>
 								<p class="text-gray-700"><?php the_excerpt(); ?></p>
 								<div class="text-gray-600 text-sm mt-2"><?php the_time('F j, Y'); ?></div>

@@ -79,4 +79,8 @@ html {
 	.link-white {
 		@apply font-normal text-xs text-white !important;
 	}
+
+	.link-muted a {
+		@apply text-gray-500 !important;
+	}
 }

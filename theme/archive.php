@@ -21,7 +21,7 @@ get_header();
 			<?php get_the_title() ?>
 		</h1>
 
-		<div class="col-start-1 col-span-4 sm:col-span-3 sm:col-start-2 xl:col-start-2 xl:col-span-2 mt-8 ouvrages-middle-scroll">
+		<div class="col-start-1 col-span-4 sm:col-span-3 sm:col-start-2 xl:col-start-2 xl:col-span-2 mt-8 project-scroll">
 
 			<?php
 			$current_year = null; // Track the current year

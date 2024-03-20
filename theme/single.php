@@ -61,20 +61,8 @@ get_header();
 					<h1 class="font-light col-span-4 lowercase ml-0 mt-0 mb-2">
 						<?php the_title(); ?>
 					</h1>
-					<div class="post-tags mb-8 text-slate-400">
-						<?php
-						$post_tags = get_the_tags();
-						$separator = ' | ';
-						$output = '';
-
-						if (!empty($post_tags)) {
-							foreach ($post_tags as $tag) {
-								$output .= '<span>' . __($tag->name) . '</span>' . $separator;
-							}
-						}
-
-						echo (trim($output, $separator));
-						?>
+					<div class="post-tags mb-4">
+						<p class="link-muted"><?php the_tags(''); ?></p>
 					</div>
 
 					<?php the_content(); ?>
@@ -143,13 +131,16 @@ get_header();
 
 								</tbody>
 							</table>
+							<?php get_template_part('template-parts/content/content', 'related'); ?>
+
+							<?php get_template_part('template-parts/content/content', 'navigation'); ?>
 						</div>
 
 					<?php endif; ?>
 
-					<?php get_template_part('template-parts/content/content', 'related'); ?>
 
-					<?php get_template_part('template-parts/content/content', 'navigation'); ?>
+
+
 
 
 				</div><!-- .entry-content -->
@@ -160,25 +151,19 @@ get_header();
 
 
 			</article><!-- #post-<?php the_ID(); ?> -->
+
 		</div>
 
 		<div class="hidden lg:block col-span-4 relative overflow-hidden">
-			<?php
-			if (has_post_thumbnail()) {
-				$large_image_url = wp_get_attachment_image_src(get_post_thumbnail_id(), 'large');
 
-			?>
-				<img src="<?php echo $large_image_url[0]; ?>" class="h-screen block object-cover w-max absolute right-0">
-			<?php
-			}
-			?>
-
+			<?php if (has_post_thumbnail()) : ?>
+				<img src="<?php the_post_thumbnail_url(); ?>" class="h-screen block object-cover w-max right-0">
+			<?php endif; ?>
 
 		</div>
 
+
 	<?php
-
-
 	endwhile; // End of the loop.
 	?>
 

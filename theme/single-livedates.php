@@ -172,7 +172,7 @@ get_header();
 			</article><!-- #post-<?php the_ID(); ?> -->
 		</div>
 
-		<div class="col-span-8 lg:col-span-4 pr-4 xl:pr-0 relative ouvrages-middle-scroll pt-8 lg:h-screen">
+		<div class="col-span-8 lg:col-span-4 pr-4 xl:pr-0 relative project-scroll pt-8 lg:h-screen">
 			<?php
 			if (has_post_thumbnail()) {
 				$large_image_url = wp_get_attachment_image_src(get_post_thumbnail_id(), 'large');

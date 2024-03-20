@@ -26,7 +26,7 @@ get_header();
 			projekte
 		</h1>
 
-		<div class="col-start-1 col-span-4 sm:col-span-3 sm:col-start-2 xl:col-start-2 xl:col-span-2 mt-8 ouvrages-middle-scroll">
+		<div class="col-start-1 col-span-4 sm:col-span-3 sm:col-start-2 xl:col-start-2 xl:col-span-2 mt-8 project-scroll">
 
 			<?php
 			$current_year = null; // Track the current year
@@ -80,25 +80,8 @@ get_header();
 
 						</div>
 						<!-- Custom Taxonomy -->
-						<div class="inline-flex items-center">
-							<?php
-							$terms = get_the_terms(get_the_ID(), 'project-type');
-							if ($terms && !is_wp_error($terms)) :
-								$term_names = wp_list_pluck($terms, 'name');
-								// echo implode('', $term_names);
-								echo '<span class="project-type">';
-								$type_links = array();
-
-								foreach ($term_names as $type) {
-									$type_links[] = '<span rel="tag" class="ml-2 inline-flex items-center rounded-md bg-schoberBrightRed px-2 py-1 text-xs font-medium text-white">' . esc_html($type) . '</span>';
-								}
-
-								// Join and output the list of links
-								echo join('', $type_links);
-								echo '</span>';
-
-							endif;
-							?>
+						<div class="inline-flex items-center types-badgers">
+							<?php the_terms(get_the_ID(), 'project-type',  $sep = "");  ?>
 						</div>
 					</li>
 			<?php
