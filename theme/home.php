@@ -32,25 +32,38 @@ get_header();
 			<!-- List container -->
 			<ul class="divide-y divide-gray-200">
 				<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+
+
 						<!-- List item for each post -->
 						<li class="py-4">
 							<article>
+								<h4 class="archive-post-category"> <?php
+																	$categories = get_the_category(); // Fetch all categories for the post
+																	$separator = ' '; // Separator between categories
+																	$output = '';
+
+																	if ($categories) {
+																		// First, display parent categories with links
+																		foreach ($categories as $category) {
+																			if ($category->parent == 0) { // Check if it's a parent category
+																				$output .= '<a href="' . esc_url(get_category_link($category->term_id)) . '" alt="' . esc_attr(sprintf(__('View all posts in %s', 'textdomain'), $category->name)) . '">' . esc_html($category->name) . '</a>' . $separator;
+
+																				// Now, find and display child categories without links
+																				$child_categories = get_categories(array('parent' => $category->term_id));
+																				foreach ($child_categories as $child) {
+																					$output .= esc_html($child->name) . $separator; // Display child category name without link
+																				}
+																			}
+																		}
+
+																		// Output the categories, trimming the trailing separator
+																		echo trim($output, $separator);
+																	}
+																	?></h4>
 								<h2 class="text-xl font-semibold text-gray-900 mb-1"><a href="<?php the_permalink(); ?>" class="hover:text-gray-600"><?php the_title(); ?></a></h2>
 								<!-- Display Tags -->
 								<div class="post-tags mb-4 text-slate-400">
-									<?php
-									$post_tags = get_the_tags();
-									$separator = ' | ';
-									$output = '';
-
-									if (!empty($post_tags)) {
-										foreach ($post_tags as $tag) {
-											$output .= '<span>' . __($tag->name) . '</span>' . $separator;
-										}
-									}
-
-									echo (trim($output, $separator));
-									?>
+									<p><?php the_tags(); ?></p>
 								</div>
 								<p class="text-gray-700"><?php the_excerpt(); ?></p>
 								<div class="text-gray-600 text-sm mt-2"><?php the_time('F j, Y'); ?></div>

@@ -99,3 +99,11 @@ td a {
 
 .mobile-menu-button-wrapper {
 }
+
+.archive-post-category {
+	@apply font-semibold text-xs;
+}
+
+.archive-post-category a {
+	@apply link-white rounded-md bg-schoberBrightRed px-2;
+}

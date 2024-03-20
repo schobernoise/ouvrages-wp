@@ -75,6 +75,8 @@ html {
 	text-decoration: underline;
 }
 
-.link-white {
-	@apply font-normal text-xs text-white !important;
+@layer base {
+	.link-white {
+		@apply font-normal text-xs text-white !important;
+	}
 }

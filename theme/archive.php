@@ -54,6 +54,7 @@ get_header();
 						</div>
 						<!-- Post layout -->
 						<div class="flex-grow px-4">
+
 							<h3 class="mb-0">
 								<a href="<?php the_permalink(); ?>">
 									<?php the_title(); ?></a>

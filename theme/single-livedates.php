@@ -19,8 +19,18 @@ get_header();
 
 	/* Start the Loop */
 	while (have_posts()) :
-		the_post(); ?>
+		the_post();
 
+		$event_date = get_post_meta(get_the_ID(), 'event_date', true);
+		// Check if the event_date is not empty
+
+		if ($event_date != "0000-00-00 00:00:00") {
+			$date = DateTime::createFromFormat('Y-m-d H:i:s', $event_date); // Adjust the format as needed
+
+		} else {
+			$date = DateTime::createFromFormat('Y-m-d H:i:s', "2099-01-01 19:00:00");
+		}
+	?>
 		<div class="col-span-8 lg:col-span-4 ">
 
 			<article id="post-<?php the_ID(); ?>" <?php post_class('grid grid-cols-4 gap-4 content-center pt-8'); ?>>
@@ -37,8 +47,13 @@ get_header();
 						<?php the_title(); ?>
 					</h1>
 
-					<div class="post-meta flex-column">
-						<span class="post-year text-xl font-bold"><?php echo get_the_date('Y'); ?></span> <!-- Display the year of the post -->
+					<div class="post-meta flex-row flex">
+						<div class="flex flex-col">
+							<span class="post-year text-xl w-auto"><?php echo $date->format('d.F Y'); ?></span>
+							<span class="post-year text-xl font-bold w-auto"><?php echo $date->format('H:m'); ?></span>
+						</div>
+
+
 
 						<?php
 						// Get the livedate-type terms for the current post

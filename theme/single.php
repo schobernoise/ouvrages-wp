@@ -35,7 +35,29 @@ get_header();
 					$archive_link = get_post_type_archive_link($post_type); ?>
 					<a href="<?php echo $archive_link ?>">zurück</a>
 
-					<h3><?php the_category(', '); ?></h3>
+					<h3><?php
+						$categories = get_the_category(); // Fetch all categories for the post
+						$separator = ' '; // Separator between categories
+						$output = '';
+
+						if ($categories) {
+							// First, display parent categories with links
+							foreach ($categories as $category) {
+								if ($category->parent == 0) { // Check if it's a parent category
+									$output .= '<a href="' . esc_url(get_category_link($category->term_id)) . '" alt="' . esc_attr(sprintf(__('View all posts in %s', 'textdomain'), $category->name)) . '">' . esc_html($category->name) . '</a>' . $separator;
+
+									// Now, find and display child categories without links
+									$child_categories = get_categories(array('parent' => $category->term_id));
+									foreach ($child_categories as $child) {
+										$output .= esc_html($child->name) . $separator; // Display child category name without link
+									}
+								}
+							}
+
+							// Output the categories, trimming the trailing separator
+							echo trim($output, $separator);
+						}
+						?></h3>
 					<h1 class="font-light col-span-4 lowercase ml-0 mt-0 mb-2">
 						<?php the_title(); ?>
 					</h1>

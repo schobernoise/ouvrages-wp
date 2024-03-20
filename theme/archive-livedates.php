@@ -15,6 +15,29 @@
 get_header();
 ?>
 
+<?php
+// Setup the custom query arguments
+$args = array(
+	'post_type' => 'livedates', // or your custom post type if different
+	'posts_per_page' => -1, // Adjust as needed, -1 for all posts
+	'meta_key' => 'event_date', // Your custom field
+	'orderby' => 'meta_value', // Order by the custom field value
+	'order' => 'DESC', // Newest posts first
+	'meta_query' => array(
+		array(
+			'key' => 'event_date',
+			'value' => array(''), // Possible to add conditions for the value
+			'compare' => '!=', // Exclude posts without a valid event_date
+			'type' => 'DATETIME', // Ensure correct ordering by treating meta value as a date
+		),
+	),
+);
+
+// The custom query
+$custom_query = new WP_Query($args);
+
+?>
+
 
 <main id="main" class="col-span-4 xl:col-span-8 mx-8 lg:mx-0 md:w-max lg:w-full">
 
@@ -30,8 +53,19 @@ get_header();
 
 			<?php
 			$current_year = null; // Track the current year
-			if (have_posts()) : while (have_posts()) : the_post();
-					$post_year = get_the_date('Y'); // Get the year of the current post
+			if ($custom_query->have_posts()) : while ($custom_query->have_posts()) : $custom_query->the_post();
+					$event_date = get_post_meta(get_the_ID(), 'event_date', true);
+					// Check if the event_date is not empty
+
+					if ($event_date != "0000-00-00 00:00:00") {
+						$date = DateTime::createFromFormat('Y-m-d H:i:s', $event_date); // Adjust the format as needed
+
+					} else {
+						$date = DateTime::createFromFormat('Y-m-d H:i:s', "2099-01-01 19:00:00");
+					}
+
+
+					$post_year = $date->format('Y'); // Get the year of the current post
 
 					// Check if the year of the current post is different from the current year being processed
 					if ($post_year !== $current_year) {
@@ -47,8 +81,9 @@ get_header();
 					<div class="flex items-center py-4 w-full">
 						<!-- Date layout -->
 						<div class="flex-shrink-0 text-center">
-							<p class="text-4xl font-bold"><?php echo get_the_date('d'); ?></p> <!-- Day -->
-							<p class="text-xs font-medium mt-2"><?php echo get_the_date('F'); ?></p> <!-- Month -->
+							<p class="text-4xl font-bold"><?php echo $date->format('d'); ?></p> <!-- Day -->
+							<p class="text-xs font-medium mt-2"><?php echo $date->format('F'); ?></p> <!-- Month -->
+							<p class="text-normal font-bold mt-2"><?php echo $date->format('H:m'); ?></p> <!-- Month -->
 						</div>
 						<!-- Post layout -->
 						<div class="flex-grow px-4">
@@ -67,7 +102,7 @@ get_header();
 							}
 							?>
 							<div class="flex items-center">
-								<p class="text-gray-600"><?php the_time('Y'); ?></p>
+								<p class="text-gray-600"><?php $date->format('Y'); ?></p>
 								<!-- Custom Taxonomy -->
 								<div class="inline-flex items-center break-keep">
 									<?php
