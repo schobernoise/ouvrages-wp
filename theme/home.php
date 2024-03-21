@@ -90,9 +90,11 @@ get_header();
 
 		$large_image_url = wp_get_attachment_image_src(get_post_thumbnail_id($page_id), 'large');
 
+		if ($large_image_url) :
 		?>
 
-		<img src="<?php echo $large_image_url[0]; ?>" class="h-screen block object-cover w-max ">
+			<img src="<?php echo $large_image_url[0]; ?>" class="h-screen block object-cover w-max ">
+		<?php endif; ?>
 	</div>
 
 

@@ -112,3 +112,21 @@ td a {
 .types-badgers a {
 	@apply ml-2 inline-flex items-center rounded-md bg-schoberBrightRed px-2 py-1 text-xs font-medium text-white !important;
 }
+
+#menu-content .search-field {
+	border-bottom: solid 1px white;
+	@apply bg-transparent text-white mt-4 mx-2 !important;
+	max-width: 6rem;
+}
+
+#menu-content .search-form {
+	@apply col-span-1;
+}
+
+#menu-content .search-submit {
+	@apply font-semibold text-xs;
+}
+
+.search-icon {
+	@apply w-2 h-2;
+}

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The template for displaying search results pages
  *
@@ -10,43 +11,115 @@
 get_header();
 ?>
 
-	<section id="primary">
-		<main id="main">
 
-		<?php if ( have_posts() ) : ?>
+<main id="main" class="col-span-4 xl:col-span-8 mx-8 lg:mx-0">
 
-			<header class="page-header">
-				<?php
-				printf(
-					/* translators: 1: search result title. 2: search term. */
-					'<h1 class="page-title">%1$s <span>%2$s</span></h1>',
-					esc_html__( 'Search results for:', 'ouvrages-wp' ),
-					get_search_query()
-				);
-				?>
-			</header><!-- .page-header -->
+	<div class="col-span-8 lg:col-span-4">
+
+
+		<?php
+		printf(
+			/* translators: 1: search result title. 2: search term. */
+			'<h1 class="page-title font-light col-span-4 lowercase mt-8">%1$s <span>%2$s</span></h1>',
+			esc_html__('Search results for:', 'ouvrages-wp'),
+			get_search_query()
+		);
+		?>
+
+		<div class="col-start-1 col-span-4 sm:col-span-3 sm:col-start-2 xl:col-start-2 xl:col-span-2 mt-8 project-scroll">
 
 			<?php
-			// Start the Loop.
-			while ( have_posts() ) :
-				the_post();
-				get_template_part( 'template-parts/content/content', 'excerpt' );
+			$current_year = null; // Track the current year
 
-				// End the loop.
-			endwhile;
+			if (have_posts()) :
+				while (have_posts()) : the_post();
+					$post_year = get_the_date('Y'); // Get the year of the current post
 
-			// Previous/next page navigation.
-			ouvrages_wp_the_posts_navigation();
+					// Check if the year of the current post is different from the current year being processed
+					if ($post_year !== $current_year) {
+						// Close the previous year's list, if it has been opened
+						if (!is_null($current_year)) {
+							echo '</ul>'; // Close the previous year's list
+						}
 
-		else :
+						// Output the year heading
+						echo '<div class="mt-8"><h4 class="text-2xl font-bold my-4">' . $post_year . '</h4></div>';
 
-			// If no content is found, get the `content-none` template part.
-			get_template_part( 'template-parts/content/content', 'none' );
+						// Start a new list for the year
+						echo '<ul class="divide-y divide-gray-200">';
+						$current_year = $post_year;
+					}
+			?>
+					<li class="flex items-center py-4 w-full">
+						<!-- Thumbnail -->
+						<div class="flex-shrink-0">
+							<?php if (has_post_thumbnail()) : ?>
+								<img src="<?php the_post_thumbnail_url('thumbnail'); ?>" alt="<?php the_title(); ?>" class="w-36 h-20 object-cover">
+							<?php endif; ?>
+						</div>
+						<!-- Post layout -->
+						<div class="flex-grow px-4">
 
-		endif;
-		?>
-		</main><!-- #main -->
-	</section><!-- #primary -->
+							<h3 class="mb-0">
+								<a href="<?php the_permalink(); ?>">
+									<?php the_title(); ?></a>
+							</h3>
+							<p class="text-xs"><?php the_excerpt(); ?></p>
+							<p class="text-gray-600 mt-3"><?php the_time('Y'); ?></p>
+						</div>
+						<!-- Custom Taxonomy -->
+						<div class="inline-flex items-cente">
+							<?php
+							$terms = get_the_terms(get_the_ID(), 'project-type');
+							if ($terms && !is_wp_error($terms)) :
+								$term_names = wp_list_pluck($terms, 'name');
+								// echo implode('', $term_names);
+								echo '<span class="project-type">';
+								$type_links = array();
+
+								foreach ($term_names as $type) {
+									$type_links[] = '<span rel="tag" class="ml-2 inline-flex items-center rounded-md bg-schoberBrightRed px-2 py-1 text-xs font-medium text-white">' . esc_html($type) . '</span>';
+								}
+
+								// Join and output the list of links
+								echo join('', $type_links);
+								echo '</span>';
+
+							endif;
+							?>
+						</div>
+					</li>
+				<?php
+				endwhile;
+				// Ensure the final list is closed
+				echo '</ul>';
+				wp_reset_postdata();
+			endif;
+
+			if (!have_posts()) :
+				?>
+
+				<p>Keine Beiträge gefunden.</p>
+
+			<?php endif; ?>
+
+
+
+		</div><!-- .entry-content -->
+
+
+	</div>
+
+	<div class="hidden lg:flex col-span-4 relative overflow-hidden justify-center">
+		<?php if (has_post_thumbnail()) : ?>
+			<img src="<?php the_post_thumbnail_url(); ?>" class="h-screen block object-cover w-max">
+		<?php endif; ?>
+	</div>
+
+
+
+</main><!-- #main -->
+
 
 <?php
 get_footer();

@@ -48,6 +48,7 @@ $logoUrl = wp_get_attachment_image_src($custom_logo_id, 'full');
 
 
 			</nav>
+			<?php get_search_form(); ?>
 		</div>
 
 

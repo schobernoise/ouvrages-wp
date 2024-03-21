@@ -326,3 +326,26 @@ function hueman_add_meta_tags()
 }
 
 add_action('wp_head', 'hueman_add_meta_tags');
+
+
+function my_custom_search_form()
+{
+	$form = '<form role="search" method="get" id="searchform" class="search-form" action="' . home_url('/') . '" >
+    <div>
+        <label class="screen-reader-text" for="s">' . __('Search for:') . '</label>
+        <input class="search-field" type="text" value="' . get_search_query() . '" name="s" id="s" />
+        <button type="submit" id="search-submit" class="search-icon"><svg fill="#ffffff" height="16px" width="16px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 488.4 488.4" xml:space="preserve" stroke="#ffffff">
+
+		<g id="SVGRepo_bgCarrier" stroke-width="0"/>
+
+		<g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+
+		<g id="SVGRepo_iconCarrier"> <g> <g> <path d="M0,203.25c0,112.1,91.2,203.2,203.2,203.2c51.6,0,98.8-19.4,134.7-51.2l129.5,129.5c2.4,2.4,5.5,3.6,8.7,3.6 s6.3-1.2,8.7-3.6c4.8-4.8,4.8-12.5,0-17.3l-129.6-129.5c31.8-35.9,51.2-83,51.2-134.7c0-112.1-91.2-203.2-203.2-203.2 S0,91.15,0,203.25z M381.9,203.25c0,98.5-80.2,178.7-178.7,178.7s-178.7-80.2-178.7-178.7s80.2-178.7,178.7-178.7 S381.9,104.65,381.9,203.25z"/> </g> </g> </g>
+
+		</svg></button>
+    </div>
+    </form>';
+
+	return $form;
+}
+add_filter('get_search_form', 'my_custom_search_form');
