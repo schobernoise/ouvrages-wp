@@ -116,11 +116,11 @@ td a {
 #menu-content .search-field {
 	border-bottom: solid 1px white;
 	@apply bg-transparent text-white mt-4 mx-2 !important;
-	max-width: 6rem;
+	max-width: 5.5rem;
 }
 
 #menu-content .search-form {
-	@apply col-span-1;
+	@apply col-span-1 items-center justify-center flex xl:pr-8;
 }
 
 #menu-content .search-submit {

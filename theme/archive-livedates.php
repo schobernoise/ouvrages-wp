@@ -105,24 +105,9 @@ $custom_query = new WP_Query($args);
 								<p class="text-gray-600"><?php $date->format('Y'); ?></p>
 								<!-- Custom Taxonomy -->
 								<div class="inline-flex items-center break-keep">
-									<?php
-									$terms = get_the_terms(get_the_ID(), 'livedate-type');
-									if ($terms && !is_wp_error($terms)) :
-										$term_names = wp_list_pluck($terms, 'name');
-										// echo implode('', $term_names);
-										echo '<span class="project-type break-keep">';
-										$type_links = array();
-
-										foreach ($term_names as $type) {
-											$type_links[] = '<span rel="tag" class="ml-2 inline-flex items-center rounded-md bg-schoberBrightRed px-2 py-1 text-xs font-medium text-white">' . esc_html($type) . '</span>';
-										}
-
-										// Join and output the list of links
-										echo join('', $type_links);
-										echo '</span>';
-
-									endif;
-									?>
+									<div class="inline-flex items-center types-badgers">
+										<?php the_terms(get_the_ID(), 'livedate-type',  $sep = "");  ?>
+									</div>
 								</div>
 							</div>
 
@@ -146,7 +131,7 @@ $custom_query = new WP_Query($args);
 	<div class="hidden lg:flex col-span-4 relative overflow-hidden justify-center">
 		<?php
 
-		$page = get_page_by_path('live', OBJECT, 'page');
+		$page = get_page_by_path('live-page', OBJECT, 'page');
 		$page_id = $page->ID;
 
 

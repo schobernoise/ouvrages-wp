@@ -102,7 +102,7 @@ get_header();
 	<div class="hidden lg:flex col-span-4 relative overflow-hidden justify-center">
 		<?php
 
-		$page = get_page_by_path('projekte', OBJECT, 'page');
+		$page = get_page_by_path('projekte-page', OBJECT, 'page');
 		$page_id = $page->ID;
 
 

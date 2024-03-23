@@ -333,7 +333,7 @@ add_action('wp_head', 'hueman_add_meta_tags');
 function my_custom_search_form()
 {
 	$form = '<form role="search" method="get" id="searchform" class="search-form" action="' . home_url('/') . '" >
-    <div>
+    <div class="flex flex-nowrap align-middle items-center">
         <label class="screen-reader-text" for="s">' . __('Search for:') . '</label>
         <input class="search-field" type="text" value="' . get_search_query() . '" name="s" id="s" />
         <button type="submit" id="search-submit" class="search-icon"><svg fill="#ffffff" height="16px" width="16px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 488.4 488.4" xml:space="preserve" stroke="#ffffff">
