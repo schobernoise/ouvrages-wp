@@ -8,6 +8,24 @@
  * @package ouvrages-wp
  */
 
+require 'plugin-update-checker/plugin-update-checker.php';
+
+use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
+
+$myUpdateChecker = PucFactory::buildUpdateChecker(
+	'https://github.com/schobernoise/sdfsdfsdfsdf',
+	__FILE__,
+	'ouvrages-wp'
+);
+
+//Set the branch that contains the stable release.
+$myUpdateChecker->setBranch('main');
+
+// $myUpdateChecker->getVcsApi()->enableReleaseAssets();
+
+
+
+
 if (!defined('OUVRAGES_WP_VERSION')) {
 	/*
 	 * Set the theme’s version number.
@@ -16,7 +34,7 @@ if (!defined('OUVRAGES_WP_VERSION')) {
 	 * to create your production build, the value below will be replaced in the
 	 * generated zip file with a timestamp, converted to base 36.
 	 */
-	define('OUVRAGES_WP_VERSION', '0.1.0');
+	define('OUVRAGES_WP_VERSION', '1.0.2');
 }
 
 if (!defined('OUVRAGES_WP_TYPOGRAPHY_CLASSES')) {

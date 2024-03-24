@@ -18,5 +18,8 @@
 		"allow-plugins": {
 			"dealerdirect/phpcodesniffer-composer-installer": true
 		}
+	},
+	"require": {
+		"aristath/github-theme-updater": "^0.2.0"
 	}
 }

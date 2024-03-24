@@ -15,7 +15,7 @@ const slug = args[0];
 
 if (slug) {
 	// Set the path for the ZIP file.
-	const zipFilePath = __dirname + '/../' + slug + '.zip';
+	const zipFilePath = __dirname + '/../dist/' + slug + '.zip';
 
 	// Create a file to stream archive data to.
 	const output = fs.createWriteStream(zipFilePath);

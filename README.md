@@ -1,7 +1,12 @@
-Ouvrages Wordpress
+Ouvrages Wordpress Theme for Fabian Schober
 ==================
 
-A theme for Media Artists
+A Wordpress theme for Media Artists, built with minimalism and speed in mind.
+
+## Features
+
+- Github Releases trigger automatic Wordpress updates.
+- Projects, Livedates and Posts
 
 ## Quickstart
 

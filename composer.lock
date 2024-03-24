@@ -4,8 +4,52 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6dbc40aed5132020ac816fd7ac1f2333",
-    "packages": [],
+    "content-hash": "dd5cfc13eefa93aaafcaec2c80dbcdae",
+    "packages": [
+        {
+            "name": "aristath/github-theme-updater",
+            "version": "v0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/aristath/github-theme-updater.git",
+                "reference": "edc92b0d2ceca56195843f2feb663fec6d03d671"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/aristath/github-theme-updater/zipball/edc92b0d2ceca56195843f2feb663fec6d03d671",
+                "reference": "edc92b0d2ceca56195843f2feb663fec6d03d671",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6"
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "aristath",
+                    "email": "aristath@gmail.com",
+                    "homepage": "https://aristath.github.io",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Custom updater class for WordPress themes hosted on Github",
+            "homepage": "https://aristath.github.io/github-theme-updater",
+            "keywords": [
+                "Theme Updater",
+                "github",
+                "wordpress"
+            ],
+            "support": {
+                "issues": "https://github.com/aristath/github-theme-updater/issues",
+                "source": "https://github.com/aristath/github-theme-updater/tree/v0.2"
+            },
+            "time": "2023-12-22T11:10:16+00:00"
+        }
+    ],
     "packages-dev": [
         {
             "name": "dealerdirect/phpcodesniffer-composer-installer",
@@ -1468,5 +1512,5 @@
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.6.0"
 }

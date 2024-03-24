@@ -1,6 +1,7 @@
 # Ignore dependencies from npm and Composer:
 /node_modules
 /vendor
+/dist
 
 # Ignore generated JavaScript files:
 *.min.js
