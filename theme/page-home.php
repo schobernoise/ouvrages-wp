@@ -34,33 +34,31 @@ get_header();
 					<?php echo get_bloginfo('name'); ?>
 				</h1>
 
-				<div <?php ouvrages_wp_content_class('entry-content col-start-1 col-span-4 col-start-1 sm:col-span-3 sm:col-start-2 xl:col-start-2 xl:col-span-2 mt-8'); ?>>
+				<div <?php ouvrages_wp_content_class('entry-content col-start-1 col-span-4 col-start-1 sm:col-span-3 sm:col-start-2 xl:col-start-2 xl:col-span-2 mt-8 project-scroll'); ?>>
+
+
 					<?php the_content(); ?>
 
+					<?php get_template_part('template-parts/content/content', 'customfields'); ?>
+
+
+
+					<div class="p-2 col-start-1 col-span-4  sm:col-span-3 sm:col-start-2 xl:col-start-2 xl:col-span-2 mt-8 bg-schoberDarkRed ">
+
+						<h4 class="font-bold text-white mt-0">Neuester Beitrag</h4>
+						<?php
+
+						$recent_posts = wp_get_recent_posts(array(
+							'numberposts' => 1, // Number of recent posts thumbnails to display
+							'post_status' => 'publish' // Show only the published posts
+						));
+						foreach ($recent_posts as $recent) {
+							echo '<a class="link-white"  href="' . get_permalink($recent["ID"]) . '">' . get_the_title($recent["ID"]) . '</a>';
+						}
+						?>
+					</div>
+
 				</div><!-- .entry-content -->
-
-
-
-				<?php get_template_part('template-parts/content/content', 'customfields'); ?>
-
-
-
-				<div class="p-2 col-start-1 col-span-4  sm:col-span-3 sm:col-start-2 xl:col-start-2 xl:col-span-2 mt-8 bg-schoberDarkRed ">
-
-					<h4 class="font-bold text-white mt-0">Neuester Beitrag</h4>
-					<?php
-
-					$recent_posts = wp_get_recent_posts(array(
-						'numberposts' => 1, // Number of recent posts thumbnails to display
-						'post_status' => 'publish' // Show only the published posts
-					));
-					foreach ($recent_posts as $recent) {
-						echo '<a class="link-white"  href="' . get_permalink($recent["ID"]) . '">' . get_the_title($recent["ID"]) . '</a>';
-					}
-					?>
-				</div>
-
-
 
 
 
