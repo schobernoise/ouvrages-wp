@@ -33,7 +33,7 @@ get_header();
 	?>
 		<div class="col-span-8 lg:col-span-4">
 
-			<article id="post-<?php the_ID(); ?>" <?php post_class('grid grid-cols-4 gap-4 content-center pt-8'); ?>>
+			<article id="post-<?php the_ID(); ?>" <?php post_class('grid grid-cols-4 gap-4 content-center md:pt-8'); ?>>
 
 				<div <?php ouvrages_wp_content_class('entry-content overflow-x-visible col-start-1 col-span-4 col-start-1 sm:col-span-4 sm:col-start-1 md:col-span-3 md:col-start-1 lg:col-start-1 lg:col-span-4 mt-0 project-scroll mx-8'); ?>>
 
@@ -56,41 +56,13 @@ get_header();
 							<span class="post-year text-xl font-bold w-auto"><?php echo $date->format('H:m'); ?></span>
 						</div>
 
-
-
-
-						<?php
-						// Get the livedate-type terms for the current post
-						$livedate_types = get_the_terms(get_the_ID(), 'livedate-type');
-
-						if (!empty($livedate_types) && !is_wp_error($livedate_types)) {
-							// If there are terms and no errors, display them
-							echo '<span class="livedate-type">';
-							$type_links = array();
-
-							// Loop through each term, and compile a list of links
-
-							// foreach ($livedate_types as $type) {
-							// 	$type_links[] = '<a href="' . esc_url(get_term_link($type)) . '" rel="tag" class="ml-2 inline-flex items-center rounded-md bg-schoberBrightRed px-2 py-1 text-xs font-medium text-white ">' . esc_html($type->name) . '</a>';
-							// }
-
-							foreach ($livedate_types as $type) {
-								$type_links[] = '<span rel="tag" class="ml-2 inline-flex items-center rounded-md bg-schoberBrightRed px-2 py-1 text-xs font-medium text-white">' . esc_html($type->name) . '</span>';
-							}
-
-
-							// Join and output the list of links
-							echo join('', $type_links);
-							echo '</span>';
-						}
-
-						?>
+						<div class="inline-flex items-center types-badgers">
+							<?php the_terms(get_the_ID(), 'livedate-type',  $sep = " ");  ?>
+						</div>
 
 					</div>
 
 					<?php the_content(); ?>
-
-					<!-- FIXME Customs und related sind außerhalb von scroll div -->
 
 
 					<?php get_template_part('template-parts/content/content', 'customfields'); ?>
@@ -131,10 +103,10 @@ get_header();
 
 			<?php
 			// Assuming you have the post ID in $post_id
-			$images = get_post_meta($post_id, 'images', false); // Notice the 'false' to get an array of values
+			$images = get_post_meta(get_the_ID(), 'images', false); // Notice the 'false' to get an array of values
 
 			if (!empty($images)) {
-				echo '<div class="masonry-grid columns-2 ">';
+				echo '<div class="masonry-grid columns-1 ">';
 				foreach ($images as $image_id) {
 					$image_url = wp_get_attachment_url($image_id);
 					echo '<div class="masonry-item mb-4">';

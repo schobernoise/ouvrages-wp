@@ -85,7 +85,7 @@ td a {
 
 .project-scroll {
 	@apply lg:overflow-y-scroll lg:scrollbar-hide;
-	@apply lg:h-[calc(100vh-7rem)];
+	@apply lg:h-[calc(100vh-10rem)];
 	/* @apply bg-slate-300; */
 }
 
@@ -110,7 +110,7 @@ td a {
 }
 
 .types-badgers a {
-	@apply ml-2 inline-flex items-center rounded-md bg-schoberBrightRed px-2 py-1 text-xs font-medium text-white !important;
+	@apply md:ml-2 inline-flex items-center rounded-md bg-schoberBrightRed px-2 py-1 text-xs font-medium text-white !important;
 }
 
 #menu-content .search-field {

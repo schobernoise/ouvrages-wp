@@ -1,19 +1,21 @@
 <?php
 
 /**
- * Template Name: Photography Project
+ * Template Name: Project Template
  * Template Post Type: projects
  */
+
+
 
 get_header(); ?>
 
 
 
-<main id="main" class="col-span-4 xl:col-span-8 mx-8 md:mx-0 lg:mx-0 md:w-full lg:w-full overflow-hidden">
+<main id="main" class="col-span-4 xl:col-span-8 md:mx-0 lg:mx-0 md:w-full lg:w-full overflow-hidden">
 
-	<div class="col-span-8 lg:col-span-4 pr-4 xl:pr-0 relative project-scroll pt-8 lg:h-screen mx-4 md:ml-4 lg:ml-0 pb-16 overflow-hidden">
+	<div class="col-span-8 lg:col-span-4 pr-0 md:pr-4 xl:pr-0 relative project-scroll md:pt-8 lg:h-screen mx-4 md:ml-4 lg:ml-0 pb-16 overflow-hidden">
 
-		<article id="post-<?php the_ID(); ?>" <?php post_class('grid grid-cols-4 gap-4 content-center pt-8 pb-0'); ?>>
+		<article id="post-<?php the_ID(); ?>" <?php post_class('grid grid-cols-4 gap-4 content-center md:pt-8 pb-0'); ?>>
 			<?php
 			// TODO Duplication
 			$post_type = 'projects';
@@ -25,38 +27,18 @@ get_header(); ?>
 				<h1 class="font-light col-span-4 lowercase ml-0 mt-0 mb-2">
 					<?php the_title(); ?>
 				</h1>
+				<div class="post-tags mb-4">
+					<p class="link-muted"><?php the_tags(''); ?></p>
+				</div>
+
 
 
 				<div class="post-meta flex items-center">
 					<span class="post-year text-xl font-bold"><?php echo get_the_date('Y'); ?></span> <!-- Display the year of the post -->
 
-					<?php
-					// Get the project-type terms for the current post
-					$project_types = get_the_terms(get_the_ID(), 'project-type');
-
-					if (!empty($project_types) && !is_wp_error($project_types)) {
-						// If there are terms and no errors, display them
-						echo '<span class="project-type">';
-						$type_links = array();
-
-						// Loop through each term, and compile a list of links
-
-						// foreach ($project_types as $type) {
-						// 	$type_links[] = '<a href="' . esc_url(get_term_link($type)) . '" rel="tag" class="ml-2 inline-flex items-center rounded-md bg-schoberBrightRed px-2 py-1 text-xs font-medium text-white ">' . esc_html($type->name) . '</a>';
-						// }
-
-						foreach ($project_types as $type) {
-							$type_links[] = '<span rel="tag" class="ml-2 inline-flex items-center rounded-md bg-schoberBrightRed px-2 py-1 text-xs font-medium text-white">' . esc_html($type->name) . '</span>';
-						}
-
-
-						// Join and output the list of links
-						echo join('', $type_links);
-						echo '</span>';
-					}
-
-
-					?>
+					<div class="inline-flex items-center types-badgers  ml-4 md:ml-0">
+						<?php the_terms(get_the_ID(), 'project-type',  $sep = " ");  ?>
+					</div>
 				</div>
 
 				<p class="font-bold"><?php echo get_the_excerpt() ?>
@@ -74,16 +56,12 @@ get_header(); ?>
 
 			</div><!-- .entry-content -->
 
-
-
-
-
 		</article><!-- #post-<?php the_ID(); ?> -->
 
 
 	</div>
 
-	<div class="col-span-8 lg:col-span-4 pr-4 xl:pr-0 relative project-scroll pt-8 lg:h-screen mx-4 md:ml-4 lg:ml-0 pb-16">
+	<div class="col-span-8 lg:col-span-4 md:pr-4 xl:pr-0 relative project-scroll pt-8 lg:h-screen mx-4 md:ml-4 lg:ml-0 pb-16">
 		<?php
 		if (has_post_thumbnail()) {
 			$large_image_url = wp_get_attachment_image_src(get_post_thumbnail_id(), 'large');
@@ -98,10 +76,10 @@ get_header(); ?>
 
 		<?php
 		// Assuming you have the post ID in $post_id
-		$images = get_post_meta($post_id, 'images', false); // Notice the 'false' to get an array of values
+		$images = get_post_meta(get_the_ID(), 'images', false); // Notice the 'false' to get an array of values
 
 		if (!empty($images)) {
-			echo '<div class="masonry-grid columns-2 ">';
+			echo '<div class="masonry-grid columns-1 ">';
 			foreach ($images as $image_id) {
 				$image_url = wp_get_attachment_url($image_id);
 				echo '<div class="masonry-item mb-4">';
@@ -109,6 +87,8 @@ get_header(); ?>
 				echo '</div>';
 			}
 			echo '</div>';
+		} else {
+			echo get_post_meta($post_id, 'images');
 		}
 		?>
 

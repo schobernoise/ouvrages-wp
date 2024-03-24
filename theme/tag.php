@@ -17,8 +17,8 @@ get_header();
 	<div class="col-span-8 lg:col-span-4">
 
 
-		<h1 class="font-light col-span-4 lowercase md:mt-8">
-			<?php single_term_title(); // Displays the name of the term
+		<h1 class="font-light col-span-4 lowercase mt-8">
+			<?php single_tag_title(); // Displays the tag name
 			?>
 		</h1>
 
@@ -64,9 +64,11 @@ get_header();
 							<p class="text-gray-600 mt-3"><?php the_time('Y'); ?></p>
 						</div>
 						<!-- Custom Taxonomy -->
-						<div class="inline-flex items-center types-badgers">
-							<?php the_terms(get_the_ID(), 'livedate-type',  $sep = " ");  ?>
-							<?php the_terms(get_the_ID(), 'project-type',  $sep = " ");  ?>
+						<div class="inline-flex items-cente">
+							<div class="inline-flex items-center types-badgers">
+								<?php the_terms(get_the_ID(), 'livedate-type',  $sep = " ");  ?>
+								<?php the_terms(get_the_ID(), 'project-type',  $sep = " ");  ?>
+							</div>
 						</div>
 					</li>
 			<?php
@@ -85,7 +87,20 @@ get_header();
 	</div>
 
 	<div class="hidden lg:flex col-span-4 relative overflow-hidden justify-center">
+		<?php
+		if (has_post_thumbnail()) :
 
+			$page = get_page_by_path('archiv-page', OBJECT, 'page');
+			$page_id = $page->ID;
+
+
+			$large_image_url = wp_get_attachment_image_src(get_post_thumbnail_id($page_id), 'large');
+
+		?>
+
+			<img src="<?php echo $large_image_url[0]; ?>" class="h-screen block object-cover w-max">
+
+		<?php endif; ?>
 	</div>
 
 

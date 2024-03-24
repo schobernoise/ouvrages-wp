@@ -49,39 +49,46 @@ if (!empty($organized_fields)) : ?>
 		<table>
 			<tbody>
 				<?php
-				// Define an array of keys to be excluded
 
-				?>
-				<?php foreach ($organized_fields as $key => $values) : ?>
-					<?php if (!empty($values) && !in_array($key, $exclude_keys)) : // Check if non-empty and not in exclude list
-					?>
+				// Loop through each field
+				foreach ($organized_fields as $key => $values) :
+					// Skip the entire iteration if the key is in the exclude list
+					if (in_array($key, $exclude_keys)) {
+						continue; // Skip this key and its values entirely
+					}
+
+					// Process and filter values
+					$processed_values = array_filter(array_map(function ($value) use ($key) {
+						if ($value === '0000-00-00' || $value === '') {
+							return ''; // Skip empty values and '0000-00-00'
+						}
+						if (preg_match('/^\d{4}-\d{2}-\d{2}$/', $value)) { // Check for date format
+							$date = DateTime::createFromFormat('Y-m-d', $value);
+							if ($date && $date->format('Y-m-d') !== '0000-00-00') {
+								return $date->format('j. F Y'); // Correctly formatted date
+							}
+							return '';
+						}
+						return $value; // Non-date values
+					}, $values));
+
+					// Only display if there are non-empty processed values
+					if (!empty($processed_values)) : ?>
 						<tr class="border-0">
 							<th class="text-end align-top">
 								<?php
-								// Display the label if it exists, otherwise display the field name
-								echo isset($field_labels[$key]) ? esc_html($field_labels[$key]) : esc_html($key);
+								echo isset($field_labels[$key]) ? esc_html($field_labels[$key]) : esc_html($key); // Display field label or key
 								?>
-							</th> <!-- Field Label or Name -->
+							</th>
 							<td class="pl-4 pt-0 pb-4 align-top">
 								<?php
-								// Process each value, check if it's a date and format it
-								$processed_values = array_map(function ($value) {
-									// Check if the value is a date. Adjust the regex as necessary for your date formats.
-									if (preg_match('/^\d{4}-\d{2}-\d{2}$/', $value)) {
-										$date = DateTime::createFromFormat('Y-m-d', $value);
-										return $date->format('j. F Y'); // Format the date
-									}
-									return $value; // Return the original value if it's not a date
-								}, $values);
-
-								// Display the processed values
-								echo implode("<br>", $processed_values);
+								echo implode("<br>", $processed_values); // Display processed values
 								?>
 							</td>
 						</tr>
-					<?php endif; ?>
+					<?php endif; // Check for non-empty processed values
+					?>
 				<?php endforeach; ?>
-
 			</tbody>
 		</table>
 	</div>

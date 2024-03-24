@@ -23,14 +23,7 @@ $args = array(
 	'meta_key' => 'event_date', // Your custom field
 	'orderby' => 'meta_value', // Order by the custom field value
 	'order' => 'DESC', // Newest posts first
-	'meta_query' => array(
-		array(
-			'key' => 'event_date',
-			'value' => array(''), // Possible to add conditions for the value
-			'compare' => '!=', // Exclude posts without a valid event_date
-			'type' => 'DATETIME', // Ensure correct ordering by treating meta value as a date
-		),
-	),
+
 );
 
 // The custom query
@@ -44,7 +37,7 @@ $custom_query = new WP_Query($args);
 	<div class="col-span-8 lg:col-span-4 ">
 
 
-		<h1 class="font-light col-span-4 lowercase mt-8">
+		<h1 class="font-light col-span-4 lowercase md:mt-8">
 			<!-- <?php get_the_title() ?> -->
 			live
 		</h1>
@@ -78,7 +71,7 @@ $custom_query = new WP_Query($args);
 						$current_year = $post_year;
 					}
 			?>
-					<div class="flex items-center py-4 w-full">
+					<div class="flex items-center py-4 w-full my-4 md:my-0">
 						<!-- Date layout -->
 						<div class="flex-shrink-0 text-center">
 							<p class="text-4xl font-bold"><?php echo $date->format('d'); ?></p> <!-- Day -->

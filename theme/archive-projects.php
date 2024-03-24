@@ -21,7 +21,7 @@ get_header();
 	<div class="col-span-8 lg:col-span-4">
 
 
-		<h1 class="font-light col-span-4 lowercase mt-8">
+		<h1 class="font-light col-span-4 lowercase md:mt-8">
 			<!-- <?php get_the_title() ?> -->
 			projekte
 		</h1>
@@ -50,21 +50,20 @@ get_header();
 						$current_year = $post_year;
 					}
 			?>
-					<li class="flex items-center py-4 w-full">
+					<li class="flex flex-col md:flex-row items-start md:items-center py-4 w-full ">
 						<!-- Thumbnail -->
-						<div class="flex-shrink-0">
+						<div class="md:flex-shrink-0 md:w-auto">
 							<?php if (has_post_thumbnail()) : ?>
-								<img src="<?php the_post_thumbnail_url('thumbnail'); ?>" alt="<?php the_title(); ?>" class="w-36 h-20 object-cover">
+								<img src="<?php the_post_thumbnail_url('thumbnail'); ?>" alt="<?php the_title(); ?>" class=" w-48 md:w-36 h-30 object-cover">
 							<?php endif; ?>
 						</div>
 						<!-- Post layout -->
-						<div class="flex-grow px-4">
-							<h3 class="mb-0">
+						<div class="flex-grow md:px-4">
+							<h3 class=" my-2 md:my-0">
 								<a href="<?php the_permalink(); ?>">
 									<?php the_title(); ?></a>
 							</h3>
-							<p class="text-xs"><?php the_excerpt(); ?></p>
-							<!-- <p class="text-gray-600 mt-3 font-bold text-xs"><?php the_time('Y'); ?></p> -->
+							<p class="text-xs mb-4 md:mb-0"><?php echo get_the_excerpt(); ?></p>
 
 
 							<?php
@@ -81,7 +80,7 @@ get_header();
 						</div>
 						<!-- Custom Taxonomy -->
 						<div class="inline-flex items-center types-badgers">
-							<?php the_terms(get_the_ID(), 'project-type',  $sep = "");  ?>
+							<?php the_terms(get_the_ID(), 'project-type',  $sep = " ");  ?>
 						</div>
 					</li>
 			<?php
@@ -102,7 +101,7 @@ get_header();
 	<div class="hidden lg:flex col-span-4 relative overflow-hidden justify-center">
 		<?php
 
-		$page = get_page_by_path('projekte', OBJECT, 'page');
+		$page = get_page_by_path('projekte-page', OBJECT, 'page');
 		$page_id = $page->ID;
 
 

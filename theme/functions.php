@@ -9,8 +9,6 @@
  */
 
 
-
-
 if (!defined('OUVRAGES_WP_VERSION')) {
 	/*
 	 * Set the theme’s version number.
@@ -19,7 +17,7 @@ if (!defined('OUVRAGES_WP_VERSION')) {
 	 * to create your production build, the value below will be replaced in the
 	 * generated zip file with a timestamp, converted to base 36.
 	 */
-	define('OUVRAGES_WP_VERSION', '1.0.2');
+	define('OUVRAGES_WP_VERSION', '1.0.3');
 }
 
 if (!defined('OUVRAGES_WP_TYPOGRAPHY_CLASSES')) {
