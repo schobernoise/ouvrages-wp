@@ -17,7 +17,7 @@ if (!defined('OUVRAGES_WP_VERSION')) {
 	 * to create your production build, the value below will be replaced in the
 	 * generated zip file with a timestamp, converted to base 36.
 	 */
-	define('OUVRAGES_WP_VERSION', '1.0.3');
+	define('OUVRAGES_WP_VERSION', '1.0.4');
 }
 
 if (!defined('OUVRAGES_WP_TYPOGRAPHY_CLASSES')) {
@@ -297,38 +297,6 @@ function special_nav_class($classes, $item)
 }
 
 
-function hueman_add_meta_tags()
-{
-
-	global $post;
-
-	if (is_singular()) {
-
-		$des_post = $post->post_excerpt;
-		$des_post = mb_substr($des_post, 0, 300, 'utf8');
-		echo '<meta name="description" content="' . $des_post . '" />' . "\n";
-	}
-
-	if (is_home()) {
-
-		echo '<meta name="description" content="' . get_bloginfo("description") . '" />' . "\n";
-	}
-
-	if (is_page()) {
-
-		$des_post = $post->post_excerpt;
-		echo '<meta name="description" content="' . $des_post . '" />' . "\n";
-	}
-
-	if (is_category()) {
-
-		$des_cat = strip_tags(category_description());
-
-		echo '<meta name="description" content="' . $des_cat . '" />' . "\n";
-	}
-}
-
-add_action('wp_head', 'hueman_add_meta_tags');
 
 
 function my_custom_search_form()
